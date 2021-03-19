@@ -22,18 +22,18 @@ public class TwoPlayerMode2 {
     char[] steps = new char[fieldSize];
     static int stepCounter = 0;
 
-    YCoordinatesComparator YComp = new YCoordinatesComparator();
-    XCoordinatesComparator XComp = new XCoordinatesComparator();
-    ChainedComparator cc1 = new ChainedComparator(YComp, XComp);
+    YCoordinatesComparator yComp = new YCoordinatesComparator();
+    XCoordinatesComparator xComp = new XCoordinatesComparator();
+    ChainedComparator cc1 = new ChainedComparator(yComp, xComp);
 
 
 
-    List<Integer> ExCoordinatesY = new ArrayList();
-    List<Integer> ExCoordinatesX = new ArrayList();
-    List<Integer> OoCoordinatesY = new ArrayList();
-    List<Integer> OoCoordinatesX = new ArrayList();
-    List<Integer> AllCoordinatesY = new ArrayList();
-    List<Integer> AllCoordinatesX = new ArrayList();
+    List<Integer> exCoordinatesY = new ArrayList();
+    List<Integer> exCoordinatesX = new ArrayList();
+    List<Integer> ooCoordinatesY = new ArrayList();
+    List<Integer> ooCoordinatesX = new ArrayList();
+    List<Integer> allCoordinatesY = new ArrayList();
+    List<Integer> allCoordinatesX = new ArrayList();
 
 
     public TwoPlayerMode2(int fieldDimensionY, int fieldDimensionX) {
@@ -42,8 +42,8 @@ public class TwoPlayerMode2 {
     }
 
     public void addOoStep (int y, int x) {
-        OoCoordinatesY.add(y);
-        OoCoordinatesX.add(x);
+        ooCoordinatesY.add(y);
+        ooCoordinatesX.add(x);
 
         yCoordinates[yCounter] = y;
         yCounter++;
@@ -51,16 +51,16 @@ public class TwoPlayerMode2 {
         xCoordinates[xCounter] = x;
         xCounter++;
 
-        AllCoordinatesY.add(y);
-        AllCoordinatesX.add(x);
+        allCoordinatesY.add(y);
+        allCoordinatesX.add(x);
 
         steps[stepCounter] = 'O';
         stepCounter++;
     }
 
     public void addExStep (int y, int x) {
-        ExCoordinatesY.add(y);
-        ExCoordinatesX.add(x);
+        exCoordinatesY.add(y);
+        exCoordinatesX.add(x);
 
         yCoordinates[yCounter] = y;
         yCounter++;
@@ -68,8 +68,8 @@ public class TwoPlayerMode2 {
         xCoordinates[xCounter] = x;
         xCounter++;
 
-        AllCoordinatesY.add(y);
-        AllCoordinatesX.add(x);
+        allCoordinatesY.add(y);
+        allCoordinatesX.add(x);
 
         steps[stepCounter] = 'X';
         stepCounter++;
@@ -104,22 +104,23 @@ public class TwoPlayerMode2 {
         return result;
     }
 
-    //talalatok megtalalasa (4 darab egy egyenes menten megsyakitas nelkul, egy fajtabol)
-    public boolean matcher (List stepList) { //return value legyen majd Player
-        List<AbstractStep> list = stepList;
+    //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol)
+    public boolean matcherX () { //return value legyen majd Player
         boolean result = false;
 
-        //fuggolegesen talalat
-        Collections.sort(list, YComp);
 
-        for (int i = 0; i < list.size(); i++) {
+        //fuggolegesen talalat
+        List<Integer> list1 = exCoordinatesY;
+        Collections.sort(list1);
+
+        for (int i = 0; i < list1.size(); i++) {
 
             int continuityCounterY = 0;
             int[] forCheckCont = new int[4];
 
-            for (int j = 0; j < list.size(); j++) {
-                if (list.get(i).getYCoordinate() == list.get(j).getYCoordinate() && continuityCounterY < 4) {
-                    forCheckCont[continuityCounterY] = list.get(j).getXCoordinate();
+            for (int j = 0; j < list1.size(); j++) {
+                if (list1.get(i) == list1.get(j) && continuityCounterY < 4){
+                    forCheckCont[continuityCounterY] = exCoordinatesX.get(j);
                     continuityCounterY++;
                 }
 
@@ -131,16 +132,17 @@ public class TwoPlayerMode2 {
         }
 
         //vizszintesen talalat
-        Collections.sort(list, XComp);
+        List<Integer> list2 = exCoordinatesX;
+        Collections.sort(list2);
 
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list2.size(); i++) {
 
             int continuityCounterX = 0;
             int[] forCheckCont = new int[4];
 
-            for (int j = 0; j < list.size(); j++) {
-                if (list.get(i).getXCoordinate() == list.get(j).getXCoordinate() && continuityCounterX < 4) {
-                    forCheckCont[continuityCounterX] = list.get(j).getYCoordinate();
+            for (int j = 0; j < list2.size(); j++) {
+                if (list2.get(i) == list2.get(j) && continuityCounterX < 4){
+                    forCheckCont[continuityCounterX] = exCoordinatesY.get(j);
                     continuityCounterX++;
                 }
 
@@ -148,12 +150,11 @@ public class TwoPlayerMode2 {
             if (continuityCounterX == 4) {
                 Arrays.sort(forCheckCont);
                 return continuity(forCheckCont);
-
             }
         }
 
         //atlos talalat bal felso sarokbol jobb alulra
-
+/*
         Collections.sort(list, cc1);
 
         for (int i = 0; i < list.size(); i++) {
@@ -209,7 +210,7 @@ public class TwoPlayerMode2 {
 
             }
         }
-
+*/
         return result;
     }
 

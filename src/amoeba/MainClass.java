@@ -6,14 +6,14 @@ public class MainClass {
 
     public static void main(String[] args) throws IOException {
 
-        //Test2 t = new Test2();
-        //t.test();
+        Test2 t = new Test2();
+        t.test();
 
-        TwoPlayerMode2 tpm = new TwoPlayerMode2(8,8);
-        int a = tpm.fieldDimensionY;
-        int b = tpm.fieldDimensionX;
+        //TwoPlayerMode2 tpm = new TwoPlayerMode2(8,8);
+        //int a = tpm.fieldDimensionY;
+        //int b = tpm.fieldDimensionX;
 
-        System.out.println(a + " " + b);
+        //System.out.println(a + " " + b);
 
 /*
         TwoPlayerMode2 tpm2 = new TwoPlayerMode2(8,8);

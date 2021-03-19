@@ -17,8 +17,11 @@ public class Test2 {
             //first
             ViewConsoleTexts.printFirstPlayerChooses();
 
-            tpm.fieldDimensionY = 8;
-            tpm.fieldDimensionX = 8;
+            System.out.println(tpm.fieldDimensionY);
+            System.out.println(tpm.fieldDimensionX);
+
+            //tpm.fieldDimensionY = 8;
+            //tpm.fieldDimensionX = 8;
 
             char c = gl.getStepXInput();
             char d = gl.getStepXInput();
@@ -31,6 +34,8 @@ public class Test2 {
             char[][] wholeField = tpm.getCurrentWholeField();
 
             vgf.printField(8,8,wholeField);
+
+            //if (tpm.matcherX()) {System.out.println("The Winner is Player #1!!! (\"X\")");}
 
 
             //second
@@ -47,6 +52,8 @@ public class Test2 {
             char[][] wholeField1 = tpm.getCurrentWholeField();
 
             vgf.printField(8,8,wholeField1);
+
+            //if (tpm.matcher()) {System.out.println("The Winner is Player #2!!! (\"O\")");}
 
         }
     }
