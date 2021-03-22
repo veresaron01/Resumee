@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class TwoPlayerMode2 {
+public class Model_GameUtility {
 
     int fieldDimensionY = 0;
     int fieldDimensionX = 0;
@@ -22,11 +22,6 @@ public class TwoPlayerMode2 {
     char[] steps;// = new char[fieldSize];
     static int stepCounter = 0;
 
-    //YCoordinatesComparator yComp = new YCoordinatesComparator();
-    //XCoordinatesComparator xComp = new XCoordinatesComparator();
-    //ChainedComparator cc1 = new ChainedComparator(yComp, xComp);
-
-
     List<Integer> exCoordinatesY = new ArrayList();
     List<Integer> exCoordinatesX = new ArrayList();
     List<Integer> ooCoordinatesY = new ArrayList();
@@ -35,13 +30,20 @@ public class TwoPlayerMode2 {
     List<Integer> allCoordinatesX = new ArrayList();
     List<String> allStepsInString = new ArrayList();
 
-    public TwoPlayerMode2(int fieldDimensionY, int fieldDimensionX) {
+    public Model_GameUtility(int fieldDimensionY, int fieldDimensionX) {
         this.fieldDimensionY = fieldDimensionY;
         this.fieldDimensionX = fieldDimensionX;
         this.fieldSize = fieldDimensionY * fieldDimensionX;
         yCoordinates = new int[fieldDimensionY * fieldDimensionX];
         xCoordinates = new int[fieldDimensionY * fieldDimensionX];
         steps = new char[fieldDimensionY * fieldDimensionX];
+    }
+
+    public boolean checkDrawGame () {
+        if (steps.length == fieldSize) {
+            return true;
+        }
+        return false;
     }
 
     public boolean checkValidity (int y, int x) {
@@ -115,7 +117,16 @@ public class TwoPlayerMode2 {
                 result = false;
             }
         }
+        return result;
+    }
 
+    public static boolean continuity(List<Integer> a) {
+        boolean result = true;
+        for (int i = 0; i < a.size() - 1; i++) {
+            if (a.get(i) != a.get(i + 1) - 1) {
+                result = false;
+            }
+        }
         return result;
     }
 
@@ -142,6 +153,8 @@ public class TwoPlayerMode2 {
             }
             if (continuityCounterY == 4) {
                 Arrays.sort(forCheckConty);
+                //log
+                System.out.println("EX vizszintes");
                 return continuity(forCheckConty);
             }
         }
@@ -165,49 +178,80 @@ public class TwoPlayerMode2 {
             }
             if (continuityCounterX == 4) {
                 Arrays.sort(forCheckContx);
+                //log
+                System.out.println("EX fuggoleges");
                 return continuity(forCheckContx);
             }
         }
 
         //atlosan talalat
-        List<Integer> list3a = new ArrayList();
-        list3a.addAll(exCoordinatesX);
-        Collections.sort(list3a);
-
-        List<Integer> list3b = new ArrayList();
-        list3b.addAll(exCoordinatesY);
-        Collections.sort(list3b);
-
         int continuityCounterX = 0;
 
-        int[] forCheckContx = new int[3];
+        //
+        //int[] forCheckContx = new int[3];
+        List<Integer> list3 = new ArrayList();
 
-        for (int i = 0; i < list3a.size() - 1; i++) {
-            forCheckContx[0] = list3a.get(i);
-            if (list3a.get(i) == list3a.get(i + 1) - 1 && continuityCounterX < 3) {
-                forCheckContx[continuityCounterX] = exCoordinatesX.get(i + 1);
+        for (int i = 0; i < list2.size() - 1; i++) {
+            //
+            //forCheckContx[0] = list2.get(i);
+            if (list2.get(i) == list2.get(i + 1) - 1 && continuityCounterX < 3) {
+                //
+                //forCheckContx[continuityCounterX] = exCoordinatesX.get(i);
+                list3.add(exCoordinatesX.get(i));
                 continuityCounterX++;
+                System.out.println(exCoordinatesX.get(i) + " fccx talalat");
             }
         }
 
         int continuityCounterY1 = 0;
         int continuityCounterY2 = 0;
-        int[] forCheckConty1 = new int[3];
-        int[] forCheckConty2 = new int[3];
+        //
+        //int[] forCheckConty1 = new int[3];
+        List<Integer> list4 = new ArrayList();
+        //
+        //int[] forCheckConty2 = new int[3];
+        List<Integer> list5 = new ArrayList();
 
-        for (int i = 0; i < list3b.size() - 1; i++) {
-            forCheckConty1[0] = list3b.get(i);
-            if (list3b.get(i) == list3b.get(i + 1) - 1 && continuityCounterY1 < 3) {
-                forCheckConty1[continuityCounterY1] = exCoordinatesY.get(i + 1);
+        for (int i = 0; i < list1.size() - 1; i++) {
+            //
+            //forCheckConty1[0] = list1.get(i);
+            if (list1.get(i) == list1.get(i + 1) - 1 && continuityCounterY1 < 3) {
+                //
+                //forCheckConty1[continuityCounterY1] = exCoordinatesY.get(i);
+                list4.add(exCoordinatesY.get(i));
                 continuityCounterY1++;
+                System.out.println(exCoordinatesY.get(i) + " fccY1 talalt");
             }
-            if (list3b.get(i) == list3b.get(i + 1) + 1 && continuityCounterY2 < 3) {
-                forCheckConty2[continuityCounterY2] = exCoordinatesY.get(i + 1);
+            if (list1.get(i) == list1.get(i + 1) + 1 && continuityCounterY2 < 3) {
+                //
+                //forCheckConty2[continuityCounterY2] = exCoordinatesY.get(i);
+                list5.add(exCoordinatesY.get(i));
                 continuityCounterY2++;
+                System.out.println(exCoordinatesY.get(i) + " fccY2 talalt");
             }
         }
+        //Collections.sort(list3);
+        //Collections.sort(list4);
+        //Collections.sort(list5);
+        boolean continuous = continuity(list3) && continuity(list4) && continuity(list5);
 
-        if ((continuityCounterX == 3 && continuityCounterY1 == 3) || (continuityCounterX == 3 && continuityCounterY2 == 3)) {
+
+        if (((continuityCounterX == 3 && continuityCounterY1 == 3) || (continuityCounterX == 3 && continuityCounterY2 == 3)) && !continuous) {
+            //log
+            System.out.println("EX atlo");
+            System.out.println(continuityCounterX);
+            System.out.println(continuityCounterY1);
+            System.out.println(continuityCounterY2);
+            for (int a : list3){
+                System.out.println(a + " fccX");
+            }
+            for (int a : list4){
+                System.out.println(a +" fcc1");
+            }
+            for (int a : list5){
+                System.out.println(a + " fcc2");
+            }
+
             result = true;
         }
 
@@ -238,6 +282,8 @@ public class TwoPlayerMode2 {
             }
             if (continuityCounterY == 4) {
                 Arrays.sort(forCheckConty);
+                //log
+                System.out.println("OO vizszintes");
                 return continuity(forCheckConty);
             }
         }
@@ -261,6 +307,8 @@ public class TwoPlayerMode2 {
             }
             if (continuityCounterX == 4) {
                 Arrays.sort(forCheckContx);
+                //log
+                System.out.println("OO fuggoleges");
                 return continuity(forCheckContx);
             }
         }
@@ -296,6 +344,8 @@ public class TwoPlayerMode2 {
         }
 
         if ((continuityCounterX == 3 && continuityCounterY1 == 3) || (continuityCounterX == 3 && continuityCounterY2 == 3)) {
+            //log
+            System.out.println("OO atlos");
             result = true;
         }
 

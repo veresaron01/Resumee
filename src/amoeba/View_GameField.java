@@ -1,6 +1,6 @@
 package amoeba;
 
-public class ViewGameField {
+public class View_GameField {
 
     public void printField(int height, int length, char[][] fieldValues){
         char[][] field = new char[length][height];
