@@ -25,13 +25,23 @@ public class GameLogic {
     }
 
     public char getStepXInput () throws IOException {
+        char result = ' ';
 
-        return controller.getInputFromConsole(reader);
+        while (!String.valueOf((result = controller.getInputFromConsole(reader))).matches("[1-8]")) {
+            System.out.println("Number from 1 - 8");
+        }
+
+        return result;
     }
 
     public char getStepOInput () throws IOException {
+        char result = ' ';
 
-        return controller.getInputFromConsole(reader);
+        while (!String.valueOf((result = controller.getInputFromConsole(reader))).matches("[1-8]")) {
+            System.out.println("Number from 1 - 8");
+        }
+
+        return result;
     }
 
 

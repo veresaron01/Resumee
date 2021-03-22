@@ -11,21 +11,20 @@ public class TwoPlayerMode2 {
     int fieldDimensionX = 8;
     int fieldSize = fieldDimensionY * fieldDimensionX;
 
-    int[] yCoordinates = new int[fieldDimensionY];
+    int[] yCoordinates = new int[fieldSize];
 
     static int yCounter = 0;
 
-    int[] xCoordinates = new int[fieldDimensionX];
+    int[] xCoordinates = new int[fieldSize];
 
     static int xCounter = 0;
 
     char[] steps = new char[fieldSize];
     static int stepCounter = 0;
 
-    YCoordinatesComparator yComp = new YCoordinatesComparator();
-    XCoordinatesComparator xComp = new XCoordinatesComparator();
-    ChainedComparator cc1 = new ChainedComparator(yComp, xComp);
-
+    //YCoordinatesComparator yComp = new YCoordinatesComparator();
+    //XCoordinatesComparator xComp = new XCoordinatesComparator();
+    //ChainedComparator cc1 = new ChainedComparator(yComp, xComp);
 
 
     List<Integer> exCoordinatesY = new ArrayList();
@@ -34,14 +33,23 @@ public class TwoPlayerMode2 {
     List<Integer> ooCoordinatesX = new ArrayList();
     List<Integer> allCoordinatesY = new ArrayList();
     List<Integer> allCoordinatesX = new ArrayList();
-
+    List<String> allStepsInString = new ArrayList();
 
     public TwoPlayerMode2(int fieldDimensionY, int fieldDimensionX) {
         this.fieldDimensionY = fieldDimensionY;
         this.fieldDimensionX = fieldDimensionX;
     }
 
-    public void addOoStep (int y, int x) {
+    public boolean checkValidity (int y, int x) {
+        String val = y + "" + x;
+        if (allStepsInString.contains(val)) {
+            return false;
+        }
+        allStepsInString.add(val);
+        return true;
+    }
+
+    public void addOoStep(int y, int x) {
         ooCoordinatesY.add(y);
         ooCoordinatesX.add(x);
 
@@ -58,7 +66,7 @@ public class TwoPlayerMode2 {
         stepCounter++;
     }
 
-    public void addExStep (int y, int x) {
+    public void addExStep(int y, int x) {
         exCoordinatesY.add(y);
         exCoordinatesX.add(x);
 
@@ -75,28 +83,31 @@ public class TwoPlayerMode2 {
         stepCounter++;
     }
 
-    public char[][] getCurrentWholeField () {
+    public char[][] getCurrentWholeField() {
+
         char[][] currentWholeField = new char[fieldDimensionY][fieldDimensionX];
-        int temp = 0;
 
         for (int i = 0; i < fieldDimensionY; i++) {
             for (int j = 0; j < fieldDimensionX; j++) {
-                if (i == yCoordinates[temp] && j == xCoordinates[temp]) {
-                    currentWholeField[i][j] = steps[temp];
-                    temp++;
-                } else {
-                    currentWholeField[i][j] = ' ';
-                }
+                currentWholeField[i][j] = ' ';
             }
+        }
+
+        for (int i = 0; i < exCoordinatesY.size(); i++) {
+            currentWholeField[exCoordinatesY.get(i)][exCoordinatesX.get(i)] = 'X';
+        }
+
+        for (int i = 0; i < ooCoordinatesY.size(); i++) {
+            currentWholeField[ooCoordinatesY.get(i)][ooCoordinatesX.get(i)] = 'O';
         }
 
         return currentWholeField;
     }
 
-    public static boolean continuity (int[] a) {
+    public static boolean continuity(int[] a) {
         boolean result = true;
-        for (int i = 0; i < a.length -1; i++) {
-            if (a[i] != a[i+1]-1) {
+        for (int i = 0; i < a.length - 1; i++) {
+            if (a[i] != a[i + 1] - 1) {
                 result = false;
             }
         }
@@ -104,137 +115,189 @@ public class TwoPlayerMode2 {
         return result;
     }
 
-    //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol)
-    public boolean matcherX () { //return value legyen majd Player
+    //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol(X))
+    public boolean matcherX() {
         boolean result = false;
 
-
-        //fuggolegesen talalat
-        List<Integer> list1 = exCoordinatesY;
+        //vizszintesen talalat
+        List<Integer> list1 = new ArrayList();
+        list1.addAll(exCoordinatesY);
         Collections.sort(list1);
 
         for (int i = 0; i < list1.size(); i++) {
 
             int continuityCounterY = 0;
-            int[] forCheckCont = new int[4];
+            int[] forCheckConty = new int[4];
 
             for (int j = 0; j < list1.size(); j++) {
-                if (list1.get(i) == list1.get(j) && continuityCounterY < 4){
-                    forCheckCont[continuityCounterY] = exCoordinatesX.get(j);
+                if (list1.get(i) == list1.get(j) && continuityCounterY < 4) {
+                    forCheckConty[continuityCounterY] = exCoordinatesX.get(j);
                     continuityCounterY++;
                 }
 
             }
             if (continuityCounterY == 4) {
-                Arrays.sort(forCheckCont);
-                return continuity(forCheckCont);
+                Arrays.sort(forCheckConty);
+                return continuity(forCheckConty);
             }
         }
 
-        //vizszintesen talalat
-        List<Integer> list2 = exCoordinatesX;
+        //fuggolegesen talalat
+        List<Integer> list2 = new ArrayList();
+        list2.addAll(exCoordinatesX);
         Collections.sort(list2);
 
         for (int i = 0; i < list2.size(); i++) {
 
             int continuityCounterX = 0;
-            int[] forCheckCont = new int[4];
+            int[] forCheckContx = new int[4];
 
             for (int j = 0; j < list2.size(); j++) {
-                if (list2.get(i) == list2.get(j) && continuityCounterX < 4){
-                    forCheckCont[continuityCounterX] = exCoordinatesY.get(j);
+                if (list2.get(i) == list2.get(j) && continuityCounterX < 4) {
+                    forCheckContx[continuityCounterX] = exCoordinatesY.get(j);
                     continuityCounterX++;
                 }
 
             }
             if (continuityCounterX == 4) {
-                Arrays.sort(forCheckCont);
-                return continuity(forCheckCont);
+                Arrays.sort(forCheckContx);
+                return continuity(forCheckContx);
             }
         }
 
-        //atlos talalat bal felso sarokbol jobb alulra
-/*
-        Collections.sort(list, cc1);
+        //atlosan talalat
+        List<Integer> list3a = new ArrayList();
+        list3a.addAll(exCoordinatesX);
+        Collections.sort(list3a);
 
-        for (int i = 0; i < list.size(); i++) {
+        List<Integer> list3b = new ArrayList();
+        list3b.addAll(exCoordinatesY);
+        Collections.sort(list3b);
 
-            int continuityCounterX = 1;
-            int continuityCounterY = 1;
-            int[] forCheckContX = new int[4];
-            forCheckContX[0] = list.get(i).getYCoordinate();
-            int[] forCheckContY = new int[4];
-            forCheckContY[0] = list.get(i).getXCoordinate();
+        int continuityCounterX = 0;
 
-            for (int j = 0; j < list.size(); j++) {
-                if (list.get(i).getXCoordinate() == list.get(j).getXCoordinate() - 1 && list.get(i).getYCoordinate() == list.get(j).getYCoordinate() - 1 && continuityCounterX < 4 && continuityCounterY < 4) {
-                    forCheckContX[continuityCounterX +1] = list.get(j).getYCoordinate();
-                    continuityCounterX++;
-                    forCheckContY[continuityCounterY +1] = list.get(j).getXCoordinate();
-                    continuityCounterY++;
-                }
+        int[] forCheckContx = new int[3];
 
-            }
-            if (continuityCounterX == 4 && continuityCounterY == 4) {
-                Arrays.sort(forCheckContX);
-                Arrays.sort(forCheckContY);
-                return continuity(forCheckContX) && continuity(forCheckContY);
-
+        for (int i = 0; i < list3a.size() - 1; i++) {
+            forCheckContx[0] = list3a.get(i);
+            if (list3a.get(i) == list3a.get(i + 1) - 1 && continuityCounterX < 3) {
+                forCheckContx[continuityCounterX] = exCoordinatesX.get(i + 1);
+                continuityCounterX++;
             }
         }
 
-        //atlos talalat jobb felso sarokbol bal alulra??
+        int continuityCounterY1 = 0;
+        int continuityCounterY2 = 0;
+        int[] forCheckConty1 = new int[3];
+        int[] forCheckConty2 = new int[3];
 
-        for (int i = 0; i < list.size(); i++) {
-
-            int continuityCounterX = 1;
-            int continuityCounterY = 1;
-            int[] forCheckContX = new int[4];
-            forCheckContX[0] = list.get(i).getYCoordinate();
-            int[] forCheckContY = new int[4];
-            forCheckContY[0] = list.get(i).getXCoordinate();
-
-            for (int j = 0; j < list.size(); j++) {
-                if (list.get(i).getXCoordinate() == list.get(j).getXCoordinate() - 1 && list.get(i).getYCoordinate() == list.get(j).getYCoordinate() + 1 && continuityCounterX < 4 && continuityCounterY < 4) {
-                    forCheckContX[continuityCounterX +1] = list.get(j).getYCoordinate();
-                    continuityCounterX++;
-                    forCheckContY[continuityCounterY +1] = list.get(j).getXCoordinate();
-                    continuityCounterY++;
-                }
-
+        for (int i = 0; i < list3b.size() - 1; i++) {
+            forCheckConty1[0] = list3b.get(i);
+            if (list3b.get(i) == list3b.get(i + 1) - 1 && continuityCounterY1 < 3) {
+                forCheckConty1[continuityCounterY1] = exCoordinatesY.get(i + 1);
+                continuityCounterY1++;
             }
-            if (continuityCounterX == 4 && continuityCounterY == 4) {
-                Arrays.sort(forCheckContX);
-                Arrays.sort(forCheckContY);
-                return continuity(forCheckContX) && continuity(forCheckContY);
-
+            if (list3b.get(i) == list3b.get(i + 1) + 1 && continuityCounterY2 < 3) {
+                forCheckConty2[continuityCounterY2] = exCoordinatesY.get(i + 1);
+                continuityCounterY2++;
             }
         }
-*/
+
+        if ((continuityCounterX == 3 && continuityCounterY1 == 3) || (continuityCounterX == 3 && continuityCounterY2 == 3)) {
+            result = true;
+        }
+
         return result;
+
     }
 
+    //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol(O))
+    public boolean matcherO() {
+        boolean result = false;
 
-    //eltavolitani
-/*public Player matcherProba () {
-    Player winner = null;
+        //vizszintesen talalat
+        List<Integer> list1 = new ArrayList();
+        list1.addAll(ooCoordinatesY);
+        Collections.sort(list1);
 
-    int playerOnesSteps = 0; //+2 in y- and x- Coordinates
-    int playerTwosSteps = 1; //+2
+        for (int i = 0; i < list1.size(); i++) {
 
-    //check for pl1 winning?
-    for (int k = 0; k < stepCounter; k++){
-        //yCoordinates[k] ==
-    }
+            int continuityCounterY = 0;
+            int[] forCheckConty = new int[4];
 
-    for (int i = 0; i < fieldDimensionY; i++) {
-        for (int j = 0; j < fieldDimensionY; j++) {
+            for (int j = 0; j < list1.size(); j++) {
+                if (list1.get(i) == list1.get(j) && continuityCounterY < 4) {
+                    forCheckConty[continuityCounterY] = ooCoordinatesX.get(j);
+                    continuityCounterY++;
+                }
 
+            }
+            if (continuityCounterY == 4) {
+                Arrays.sort(forCheckConty);
+                return continuity(forCheckConty);
+            }
         }
-    }
 
-    return winner;
-}*/
+        //fuggolegesen talalat
+        List<Integer> list2 = new ArrayList();
+        list2.addAll(ooCoordinatesX);
+        Collections.sort(list2);
+
+        for (int i = 0; i < list2.size(); i++) {
+
+            int continuityCounterX = 0;
+            int[] forCheckContx = new int[4];
+
+            for (int j = 0; j < list2.size(); j++) {
+                if (list2.get(i) == list2.get(j) && continuityCounterX < 4) {
+                    forCheckContx[continuityCounterX] = ooCoordinatesY.get(j);
+                    continuityCounterX++;
+                }
+
+            }
+            if (continuityCounterX == 4) {
+                Arrays.sort(forCheckContx);
+                return continuity(forCheckContx);
+            }
+        }
+
+        //atlosan talalat
+        int continuityCounterX = 0;
+
+        int[] forCheckContx = new int[3];
+
+        for (int i = 0; i < list2.size() - 1; i++) {
+            forCheckContx[0] = list2.get(i);
+            if (list2.get(i) == list2.get(i + 1) - 1 && continuityCounterX < 3) {
+                forCheckContx[continuityCounterX] = ooCoordinatesX.get(i + 1);
+                continuityCounterX++;
+            }
+        }
+
+        int continuityCounterY1 = 0;
+        int continuityCounterY2 = 0;
+        int[] forCheckConty1 = new int[3];
+        int[] forCheckConty2 = new int[3];
+
+        for (int i = 0; i < list1.size() - 1; i++) {
+            forCheckConty1[0] = list1.get(i);
+            if (list1.get(i) == list1.get(i + 1) - 1 && continuityCounterY1 < 3) {
+                forCheckConty1[continuityCounterY1] = ooCoordinatesY.get(i + 1);
+                continuityCounterY1++;
+            }
+            if (list1.get(i) == list1.get(i + 1) + 1 && continuityCounterY2 < 3) {
+                forCheckConty2[continuityCounterY2] = ooCoordinatesY.get(i + 1);
+                continuityCounterY2++;
+            }
+        }
+
+        if ((continuityCounterX == 3 && continuityCounterY1 == 3) || (continuityCounterX == 3 && continuityCounterY2 == 3)) {
+            result = true;
+        }
+
+        return result;
+
+    }
 
 }
 

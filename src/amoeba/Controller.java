@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 public class Controller {
 
     public char getInputFromConsole(BufferedReader reader) throws IOException {
-        char c = reader.readLine().charAt(0);
-
+        char c;
+        String s;
+        while (!(s = reader.readLine()).matches(".")) {}
+        c = s.charAt(0);
         return c;
     }
 
