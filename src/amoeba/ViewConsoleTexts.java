@@ -29,4 +29,16 @@ public class ViewConsoleTexts {
     public static void printSecondPlayerChooses () {
         System.out.println("Player #2`s turn. First choose a row with a number and enter, than the column with a number and enter.");
     }
+
+    public static void printWrongCoordinates () {
+        System.out.println("Choose empty coordinates.");
+    }
+
+    public static void printWinner1 () {
+        System.out.println("\n\nThe Winner is Player #1!!! (\"X\") Congratulations!");
+    }
+
+    public static void printWinner2 () {
+        System.out.println("\n\nThe Winner is Player #2!!! (\"O\") Congratulations!");
+    }
 }

@@ -1,4 +1,4 @@
-package amoeba;
+/*package amoeba;
 
 import java.io.IOException;
 
@@ -52,3 +52,4 @@ public class Test {
     }
 
 }
+*/

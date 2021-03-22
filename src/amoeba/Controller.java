@@ -6,7 +6,13 @@ import java.io.InputStreamReader;
 
 public class Controller {
 
-    public char getInputFromConsole(BufferedReader reader) throws IOException {
+    BufferedReader reader;
+
+    public Controller () {
+        reader = new BufferedReader(new InputStreamReader(System.in));
+    }
+
+    public char getInputFromConsole() throws IOException {
         char c;
         String s;
         while (!(s = reader.readLine()).matches(".")) {}

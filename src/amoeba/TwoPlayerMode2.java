@@ -7,19 +7,19 @@ import java.util.List;
 
 public class TwoPlayerMode2 {
 
-    int fieldDimensionY = 8;
-    int fieldDimensionX = 8;
-    int fieldSize = fieldDimensionY * fieldDimensionX;
+    int fieldDimensionY = 0;
+    int fieldDimensionX = 0;
+    int fieldSize = 0;
 
-    int[] yCoordinates = new int[fieldSize];
+    int[] yCoordinates;// = new int[fieldSize];
 
     static int yCounter = 0;
 
-    int[] xCoordinates = new int[fieldSize];
+    int[] xCoordinates;// = new int[fieldSize];
 
     static int xCounter = 0;
 
-    char[] steps = new char[fieldSize];
+    char[] steps;// = new char[fieldSize];
     static int stepCounter = 0;
 
     //YCoordinatesComparator yComp = new YCoordinatesComparator();
@@ -38,11 +38,15 @@ public class TwoPlayerMode2 {
     public TwoPlayerMode2(int fieldDimensionY, int fieldDimensionX) {
         this.fieldDimensionY = fieldDimensionY;
         this.fieldDimensionX = fieldDimensionX;
+        this.fieldSize = fieldDimensionY * fieldDimensionX;
+        yCoordinates = new int[fieldDimensionY * fieldDimensionX];
+        xCoordinates = new int[fieldDimensionY * fieldDimensionX];
+        steps = new char[fieldDimensionY * fieldDimensionX];
     }
 
     public boolean checkValidity (int y, int x) {
         String val = y + "" + x;
-        if (allStepsInString.contains(val)) {
+        if (allStepsInString.contains(val) || y > fieldDimensionY || x > fieldDimensionX) {
             return false;
         }
         allStepsInString.add(val);
