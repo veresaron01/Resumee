@@ -13,7 +13,7 @@ public class Model_TwoPlayerGame {
         int fieldDimensionY = tpm.fieldDimensionY;
         int fieldDimensionX = tpm.fieldDimensionX;
 
-        Controller cl = new Controller();
+        Controller_UserInput cl = new Controller_UserInput();
         View_GameField vgf = new View_GameField();
 
         boolean winnerFound = false;
@@ -48,7 +48,7 @@ public class Model_TwoPlayerGame {
             }
 
             //second player
-            /*View_ConsoleTexts.printSecondPlayerChooses();
+            View_ConsoleTexts.printSecondPlayerChooses();
 
             int y1;
             int x1;
@@ -71,7 +71,7 @@ public class Model_TwoPlayerGame {
                 View_ConsoleTexts.printDraw();
                 winnerFound = true;
                 continue;
-            }*/
+            }
 
         }
     }

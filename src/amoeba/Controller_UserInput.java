@@ -4,11 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Controller {
+public class Controller_UserInput {
 
     BufferedReader reader;
 
-    public Controller () {
+    public Controller_UserInput() {
         reader = new BufferedReader(new InputStreamReader(System.in));
     }
 

@@ -2,11 +2,11 @@ package amoeba;
 
 import java.io.IOException;
 
-public class GameLogic {
+public class Model_GameLogic {
 
     public void startGame () throws IOException {
 
-        Controller controller = new Controller();
+        Controller_UserInput controller = new Controller_UserInput();
         View_ConsoleTexts vct = new View_ConsoleTexts();
         Model_TwoPlayerGame t = new Model_TwoPlayerGame();
 

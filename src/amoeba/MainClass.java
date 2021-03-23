@@ -6,7 +6,7 @@ public class MainClass {
 
     public static void main(String[] args) throws IOException {
 
-        new GameLogic().startGame();
+        new Model_GameLogic().startGame();
 
     }
 

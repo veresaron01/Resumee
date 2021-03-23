@@ -1,9 +1,6 @@
 package amoeba;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Model_GameUtility {
 
@@ -153,8 +150,6 @@ public class Model_GameUtility {
             }
             if (continuityCounterY == 4) {
                 Arrays.sort(forCheckConty);
-                //log
-                System.out.println("EX vizszintes");
                 return continuity(forCheckConty);
             }
         }
@@ -178,85 +173,60 @@ public class Model_GameUtility {
             }
             if (continuityCounterX == 4) {
                 Arrays.sort(forCheckContx);
-                //log
-                System.out.println("EX fuggoleges");
                 return continuity(forCheckContx);
             }
         }
 
-        //atlosan talalat
-        int continuityCounterX = 0;
+        //atlosan talalat balfentrol, jobb le.
+        List<String> exStepsStr = new ArrayList();
+        for (int i = 0; i < exCoordinatesY.size(); i++) {
+            String exAllStr = (exCoordinatesY.get(i) +1) + " " + (exCoordinatesX.get(i) +1);
+            exStepsStr.add(exAllStr);
+        }
 
-        //
-        //int[] forCheckContx = new int[3];
-        List<Integer> list3 = new ArrayList();
+        for (int z = 1; z < fieldDimensionX - 2; z++) {
+            for (int i = 1; i < fieldDimensionY - 2; i++) {
 
-        for (int i = 0; i < list2.size() - 1; i++) {
-            //
-            //forCheckContx[0] = list2.get(i);
-            if (list2.get(i) == list2.get(i + 1) - 1 && continuityCounterX < 3) {
-                //
-                //forCheckContx[continuityCounterX] = exCoordinatesX.get(i);
-                list3.add(exCoordinatesX.get(i));
-                continuityCounterX++;
-                System.out.println(exCoordinatesX.get(i) + " fccx talalat");
+                List<String> allStepsInTheDiagon = new ArrayList();
+
+                String element1 = (z) + " " + (i);
+                String element2 = (z + 1) + " " + (i + 1);
+                String element3 = (z + 2) + " " + (i + 2);
+                String element4 = (z + 3) + " " + (i + 3);
+
+                allStepsInTheDiagon.add(element1);
+                allStepsInTheDiagon.add(element2);
+                allStepsInTheDiagon.add(element3);
+                allStepsInTheDiagon.add(element4);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                    return true;
+                }
             }
         }
 
-        int continuityCounterY1 = 0;
-        int continuityCounterY2 = 0;
-        //
-        //int[] forCheckConty1 = new int[3];
-        List<Integer> list4 = new ArrayList();
-        //
-        //int[] forCheckConty2 = new int[3];
-        List<Integer> list5 = new ArrayList();
+        //bal lentrol, jobb fel
+        for (int z = 1; z < fieldDimensionX - 2; z++) {
+            for (int i = fieldDimensionY; i > 3; i--) {
 
-        for (int i = 0; i < list1.size() - 1; i++) {
-            //
-            //forCheckConty1[0] = list1.get(i);
-            if (list1.get(i) == list1.get(i + 1) - 1 && continuityCounterY1 < 3) {
-                //
-                //forCheckConty1[continuityCounterY1] = exCoordinatesY.get(i);
-                list4.add(exCoordinatesY.get(i));
-                continuityCounterY1++;
-                System.out.println(exCoordinatesY.get(i) + " fccY1 talalt");
-            }
-            if (list1.get(i) == list1.get(i + 1) + 1 && continuityCounterY2 < 3) {
-                //
-                //forCheckConty2[continuityCounterY2] = exCoordinatesY.get(i);
-                list5.add(exCoordinatesY.get(i));
-                continuityCounterY2++;
-                System.out.println(exCoordinatesY.get(i) + " fccY2 talalt");
+                List<String> allStepsInTheDiagon = new ArrayList();
+
+                String element1 = (z) + " " + (i);
+                String element2 = (z + 1) + " " + (i - 1);
+                String element3 = (z + 2) + " " + (i - 2);
+                String element4 = (z + 3) + " " + (i - 3);
+
+                allStepsInTheDiagon.add(element1);
+                allStepsInTheDiagon.add(element2);
+                allStepsInTheDiagon.add(element3);
+                allStepsInTheDiagon.add(element4);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                    return true;
+                }
             }
         }
-        //Collections.sort(list3);
-        //Collections.sort(list4);
-        //Collections.sort(list5);
-        boolean continuous = continuity(list3) && continuity(list4) && continuity(list5);
-
-
-        if (((continuityCounterX == 3 && continuityCounterY1 == 3) || (continuityCounterX == 3 && continuityCounterY2 == 3)) && !continuous) {
-            //log
-            System.out.println("EX atlo");
-            System.out.println(continuityCounterX);
-            System.out.println(continuityCounterY1);
-            System.out.println(continuityCounterY2);
-            for (int a : list3){
-                System.out.println(a + " fccX");
-            }
-            for (int a : list4){
-                System.out.println(a +" fcc1");
-            }
-            for (int a : list5){
-                System.out.println(a + " fcc2");
-            }
-
-            result = true;
-        }
-
         return result;
-
     }
 
     //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol(O))
@@ -282,8 +252,6 @@ public class Model_GameUtility {
             }
             if (continuityCounterY == 4) {
                 Arrays.sort(forCheckConty);
-                //log
-                System.out.println("OO vizszintes");
                 return continuity(forCheckConty);
             }
         }
@@ -307,51 +275,60 @@ public class Model_GameUtility {
             }
             if (continuityCounterX == 4) {
                 Arrays.sort(forCheckContx);
-                //log
-                System.out.println("OO fuggoleges");
                 return continuity(forCheckContx);
             }
         }
 
-        //atlosan talalat
-        int continuityCounterX = 0;
+        //atlosan talalat balfentrol, jobb le.
+        List<String> exStepsStr = new ArrayList();
+        for (int i = 0; i < ooCoordinatesY.size(); i++) {
+            String exAllStr = (ooCoordinatesY.get(i) +1) + " " + (ooCoordinatesX.get(i) +1);
+            exStepsStr.add(exAllStr);
+        }
 
-        int[] forCheckContx = new int[3];
+        for (int z = 1; z < fieldDimensionX - 2; z++) {
+            for (int i = 1; i < fieldDimensionY - 2; i++) {
 
-        for (int i = 0; i < list2.size() - 1; i++) {
-            forCheckContx[0] = list2.get(i);
-            if (list2.get(i) == list2.get(i + 1) - 1 && continuityCounterX < 3) {
-                forCheckContx[continuityCounterX] = ooCoordinatesX.get(i + 1);
-                continuityCounterX++;
+                List<String> allStepsInTheDiagon = new ArrayList();
+
+                String element1 = (z) + " " + (i);
+                String element2 = (z + 1) + " " + (i + 1);
+                String element3 = (z + 2) + " " + (i + 2);
+                String element4 = (z + 3) + " " + (i + 3);
+
+                allStepsInTheDiagon.add(element1);
+                allStepsInTheDiagon.add(element2);
+                allStepsInTheDiagon.add(element3);
+                allStepsInTheDiagon.add(element4);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                    return true;
+                }
             }
         }
 
-        int continuityCounterY1 = 0;
-        int continuityCounterY2 = 0;
-        int[] forCheckConty1 = new int[3];
-        int[] forCheckConty2 = new int[3];
+        //bal lentrol, jobb fel
+        for (int z = 1; z < fieldDimensionX - 2; z++) {
+            for (int i = fieldDimensionY; i > 3; i--) {
 
-        for (int i = 0; i < list1.size() - 1; i++) {
-            forCheckConty1[0] = list1.get(i);
-            if (list1.get(i) == list1.get(i + 1) - 1 && continuityCounterY1 < 3) {
-                forCheckConty1[continuityCounterY1] = ooCoordinatesY.get(i + 1);
-                continuityCounterY1++;
-            }
-            if (list1.get(i) == list1.get(i + 1) + 1 && continuityCounterY2 < 3) {
-                forCheckConty2[continuityCounterY2] = ooCoordinatesY.get(i + 1);
-                continuityCounterY2++;
+                List<String> allStepsInTheDiagon = new ArrayList();
+
+                String element1 = (z) + " " + (i);
+                String element2 = (z + 1) + " " + (i - 1);
+                String element3 = (z + 2) + " " + (i - 2);
+                String element4 = (z + 3) + " " + (i - 3);
+
+                allStepsInTheDiagon.add(element1);
+                allStepsInTheDiagon.add(element2);
+                allStepsInTheDiagon.add(element3);
+                allStepsInTheDiagon.add(element4);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                    return true;
+                }
             }
         }
-
-        if ((continuityCounterX == 3 && continuityCounterY1 == 3) || (continuityCounterX == 3 && continuityCounterY2 == 3)) {
-            //log
-            System.out.println("OO atlos");
-            result = true;
-        }
-
         return result;
-
     }
-
 }
 
