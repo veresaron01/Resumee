@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Model_GameLogic {
 
-    public void startGame () throws IOException {
+    public void startGame() throws IOException {
 
         Controller_UserInput controller = new Controller_UserInput();
         View_ConsoleTexts vct = new View_ConsoleTexts();
@@ -19,7 +19,7 @@ public class Model_GameLogic {
             vct.printWrongFieldDimensionSizes();
         }
 
-        t.test(yDim,xDim);
+        t.test(yDim, xDim);
 
     }
 

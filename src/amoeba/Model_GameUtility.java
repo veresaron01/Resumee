@@ -36,14 +36,14 @@ public class Model_GameUtility {
         steps = new char[fieldDimensionY * fieldDimensionX];
     }
 
-    public boolean checkDrawGame () {
+    public boolean checkDrawGame() {
         if (steps.length == fieldSize) {
             return true;
         }
         return false;
     }
 
-    public boolean checkValidity (int y, int x) {
+    public boolean checkValidity(int y, int x) {
         String val = y + "" + x;
         if (allStepsInString.contains(val) || y > fieldDimensionY || x > fieldDimensionX) {
             return false;
@@ -180,7 +180,7 @@ public class Model_GameUtility {
         //atlosan talalat balfentrol, jobb le.
         List<String> exStepsStr = new ArrayList();
         for (int i = 0; i < exCoordinatesY.size(); i++) {
-            String exAllStr = (exCoordinatesY.get(i) +1) + " " + (exCoordinatesX.get(i) +1);
+            String exAllStr = (exCoordinatesY.get(i) + 1) + " " + (exCoordinatesX.get(i) + 1);
             exStepsStr.add(exAllStr);
         }
 
@@ -282,7 +282,7 @@ public class Model_GameUtility {
         //atlosan talalat balfentrol, jobb le.
         List<String> exStepsStr = new ArrayList();
         for (int i = 0; i < ooCoordinatesY.size(); i++) {
-            String exAllStr = (ooCoordinatesY.get(i) +1) + " " + (ooCoordinatesX.get(i) +1);
+            String exAllStr = (ooCoordinatesY.get(i) + 1) + " " + (ooCoordinatesX.get(i) + 1);
             exStepsStr.add(exAllStr);
         }
 

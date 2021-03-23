@@ -27,7 +27,7 @@ public class Model_TwoPlayerGame {
             int y;
             int x;
 
-            while(!tpm.checkValidity((y = Integer.parseInt((String.valueOf(cl.getStepXInput(forRegexY)))) - 1),(x = Integer.parseInt((String.valueOf(cl.getStepXInput(forRegexX)))) - 1))) {
+            while (!tpm.checkValidity((y = Integer.parseInt((String.valueOf(cl.getStepXInput(forRegexY)))) - 1), (x = Integer.parseInt((String.valueOf(cl.getStepXInput(forRegexX)))) - 1))) {
                 View_ConsoleTexts.printWrongCoordinates();
             }
             tpm.addExStep(y, x);
@@ -38,7 +38,7 @@ public class Model_TwoPlayerGame {
 
             if (tpm.matcherX()) {
                 View_ConsoleTexts.printWinner1();
-                winnerFound =true;
+                winnerFound = true;
                 continue;
             }
             if (!tpm.checkDrawGame()) {
@@ -53,7 +53,7 @@ public class Model_TwoPlayerGame {
             int y1;
             int x1;
 
-            while(!tpm.checkValidity((y1 = Integer.parseInt((String.valueOf(cl.getStepXInput(forRegexY)))) - 1),(x1 = Integer.parseInt((String.valueOf(cl.getStepXInput(forRegexX)))) - 1))) {
+            while (!tpm.checkValidity((y1 = Integer.parseInt((String.valueOf(cl.getStepXInput(forRegexY)))) - 1), (x1 = Integer.parseInt((String.valueOf(cl.getStepXInput(forRegexX)))) - 1))) {
                 View_ConsoleTexts.printWrongCoordinates();
             }
             tpm.addOoStep(y1, x1);
@@ -64,7 +64,7 @@ public class Model_TwoPlayerGame {
 
             if (tpm.matcherO()) {
                 View_ConsoleTexts.printWinner2();
-                winnerFound =true;
+                winnerFound = true;
                 continue;
             }
             if (!tpm.checkDrawGame()) {
