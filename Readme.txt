@@ -17,9 +17,5 @@ Found in package folder 'amoeba'
 
 The program is an implementation of the classic Amoeba game.
 Its classes are distributed by the MVC pattern in order to ease the future changes to a more graphical interface.
-After start a short introduction for the players shown. The dimensions of the table need to be set, and need to be set independently in
-an arbitrary range of 4 to 8. The program draws out the game table; and then Player #1 'X' starts by first choosing the row of the sign,
-then the coloumn of it. Then Player #2 'O' does the same, until someone wins, or a draw game occurs. After each step, the freshened table 
-is drawed with the new signs in it. Each of the four winner signs must be the same kind, must be on a single line either vertically, 
-horisontally or diagonally. Everything is commented by the program.
+After start a short introduction for the players shown. The dimensions of the table need to be set, and need to be set independently in an arbitrary range of 4 to 8. The program draws out the game table; and then Player #1 'X' starts by first choosing the row of the sign, then the coloumn of it. Then Player #2 'O' does the same, until someone wins, or a draw game occurs. After each step, the freshened table is drawed with the new signs in it. Each of the four winner signs must be the same kind, must be on a single line either vertically, horisontally or diagonally. Everything is commented by the program.
 With winning or draw game occurence the program terminates.
