@@ -4,8 +4,6 @@ public class View_ConsoleTexts {
 
     public void printGameIntro() {
         System.out.println("\n\nWelcome to the Amoeba Game!\n");
-        System.out.println("You can play with a human partner, or with my AI.\n");
-        //System.out.println("Press '9' plus enter for menu at any time in the game.\n");
         System.out.println("You have to make a line of 4 with your character (x/o).\n");
         System.out.println("The line can be horizontal, vertical, or diagonal.\n");
     }
