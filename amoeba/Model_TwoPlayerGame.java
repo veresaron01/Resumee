@@ -36,7 +36,7 @@ public class Model_TwoPlayerGame {
 
             vgf.printField(fieldDimensionY, fieldDimensionX, wholeField);
 
-            if (tpm.matcherX()) {
+            if (tpm.matcher(1)) {
                 View_ConsoleTexts.printWinner1();
                 winnerFound = true;
                 continue;
@@ -62,7 +62,7 @@ public class Model_TwoPlayerGame {
 
             vgf.printField(fieldDimensionY, fieldDimensionX, wholeField1);
 
-            if (tpm.matcherO()) {
+            if (tpm.matcher(2)) {
                 View_ConsoleTexts.printWinner2();
                 winnerFound = true;
                 continue;
