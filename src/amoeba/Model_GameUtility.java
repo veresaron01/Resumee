@@ -127,6 +127,7 @@ public class Model_GameUtility {
         return result;
     }
 
+    /*
     //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol (X=1 || O=2)
     public boolean matcher(int XO) {
         List<Integer> YCoordinatesForXOrOSteps = new ArrayList();
@@ -237,6 +238,210 @@ public class Model_GameUtility {
             }
         }
         return result;
+    }*/
+    //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol(X))
+    public boolean matcherX() {
+        boolean result = false;
+
+        //vizszintesen talalat
+        List<Integer> list1 = new ArrayList();
+        list1.addAll(exCoordinatesY);
+        Collections.sort(list1);
+
+        for (int i = 0; i < list1.size(); i++) {
+
+            int continuityCounterY = 0;
+            int[] forCheckConty = new int[4];
+
+            for (int j = 0; j < list1.size(); j++) {
+                if (list1.get(i) == list1.get(j) && continuityCounterY < 4) {
+                    forCheckConty[continuityCounterY] = exCoordinatesX.get(j);
+                    continuityCounterY++;
+                }
+
+            }
+            if (continuityCounterY == 4) {
+                Arrays.sort(forCheckConty);
+                return continuity(forCheckConty);
+            }
+        }
+
+        //fuggolegesen talalat
+        List<Integer> list2 = new ArrayList();
+        list2.addAll(exCoordinatesX);
+        Collections.sort(list2);
+
+        for (int i = 0; i < list2.size(); i++) {
+
+            int continuityCounterX = 0;
+            int[] forCheckContx = new int[4];
+
+            for (int j = 0; j < list2.size(); j++) {
+                if (list2.get(i) == list2.get(j) && continuityCounterX < 4) {
+                    forCheckContx[continuityCounterX] = exCoordinatesY.get(j);
+                    continuityCounterX++;
+                }
+
+            }
+            if (continuityCounterX == 4) {
+                Arrays.sort(forCheckContx);
+                return continuity(forCheckContx);
+            }
+        }
+
+        //atlosan talalat balfentrol, jobb le.
+        List<String> exStepsStr = new ArrayList();
+        for (int i = 0; i < exCoordinatesY.size(); i++) {
+            String exAllStr = (exCoordinatesY.get(i) + 1) + " " + (exCoordinatesX.get(i) + 1);
+            exStepsStr.add(exAllStr);
+        }
+
+        for (int z = 1; z < fieldDimensionX - 2; z++) {
+            for (int i = 1; i < fieldDimensionY - 2; i++) {
+
+                List<String> allStepsInTheDiagon = new ArrayList();
+
+                String element1 = (z) + " " + (i);
+                String element2 = (z + 1) + " " + (i + 1);
+                String element3 = (z + 2) + " " + (i + 2);
+                String element4 = (z + 3) + " " + (i + 3);
+
+                allStepsInTheDiagon.add(element1);
+                allStepsInTheDiagon.add(element2);
+                allStepsInTheDiagon.add(element3);
+                allStepsInTheDiagon.add(element4);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                    return true;
+                }
+            }
+        }
+
+        //bal lentrol, jobb fel
+        for (int z = 1; z < fieldDimensionX - 2; z++) {
+            for (int i = fieldDimensionY; i > 3; i--) {
+
+                List<String> allStepsInTheDiagon = new ArrayList();
+
+                String element1 = (z) + " " + (i);
+                String element2 = (z + 1) + " " + (i - 1);
+                String element3 = (z + 2) + " " + (i - 2);
+                String element4 = (z + 3) + " " + (i - 3);
+
+                allStepsInTheDiagon.add(element1);
+                allStepsInTheDiagon.add(element2);
+                allStepsInTheDiagon.add(element3);
+                allStepsInTheDiagon.add(element4);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                    return true;
+                }
+            }
+        }
+        return result;
+    }
+
+    //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol(O))
+    public boolean matcherO() {
+        boolean result = false;
+
+        //vizszintesen talalat
+        List<Integer> list1 = new ArrayList();
+        list1.addAll(ooCoordinatesY);
+        Collections.sort(list1);
+
+        for (int i = 0; i < list1.size(); i++) {
+
+            int continuityCounterY = 0;
+            int[] forCheckConty = new int[4];
+
+            for (int j = 0; j < list1.size(); j++) {
+                if (list1.get(i) == list1.get(j) && continuityCounterY < 4) {
+                    forCheckConty[continuityCounterY] = ooCoordinatesX.get(j);
+                    continuityCounterY++;
+                }
+
+            }
+            if (continuityCounterY == 4) {
+                Arrays.sort(forCheckConty);
+                return continuity(forCheckConty);
+            }
+        }
+
+        //fuggolegesen talalat
+        List<Integer> list2 = new ArrayList();
+        list2.addAll(ooCoordinatesX);
+        Collections.sort(list2);
+
+        for (int i = 0; i < list2.size(); i++) {
+
+            int continuityCounterX = 0;
+            int[] forCheckContx = new int[4];
+
+            for (int j = 0; j < list2.size(); j++) {
+                if (list2.get(i) == list2.get(j) && continuityCounterX < 4) {
+                    forCheckContx[continuityCounterX] = ooCoordinatesY.get(j);
+                    continuityCounterX++;
+                }
+
+            }
+            if (continuityCounterX == 4) {
+                Arrays.sort(forCheckContx);
+                return continuity(forCheckContx);
+            }
+        }
+
+        //atlosan talalat balfentrol, jobb le.
+        List<String> exStepsStr = new ArrayList();
+        for (int i = 0; i < ooCoordinatesY.size(); i++) {
+            String exAllStr = (ooCoordinatesY.get(i) + 1) + " " + (ooCoordinatesX.get(i) + 1);
+            exStepsStr.add(exAllStr);
+        }
+
+        for (int z = 1; z < fieldDimensionX - 2; z++) {
+            for (int i = 1; i < fieldDimensionY - 2; i++) {
+
+                List<String> allStepsInTheDiagon = new ArrayList();
+
+                String element1 = (z) + " " + (i);
+                String element2 = (z + 1) + " " + (i + 1);
+                String element3 = (z + 2) + " " + (i + 2);
+                String element4 = (z + 3) + " " + (i + 3);
+
+                allStepsInTheDiagon.add(element1);
+                allStepsInTheDiagon.add(element2);
+                allStepsInTheDiagon.add(element3);
+                allStepsInTheDiagon.add(element4);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                    return true;
+                }
+            }
+        }
+
+        //bal lentrol, jobb fel
+        for (int z = 1; z < fieldDimensionX - 2; z++) {
+            for (int i = fieldDimensionY; i > 3; i--) {
+
+                List<String> allStepsInTheDiagon = new ArrayList();
+
+                String element1 = (z) + " " + (i);
+                String element2 = (z + 1) + " " + (i - 1);
+                String element3 = (z + 2) + " " + (i - 2);
+                String element4 = (z + 3) + " " + (i - 3);
+
+                allStepsInTheDiagon.add(element1);
+                allStepsInTheDiagon.add(element2);
+                allStepsInTheDiagon.add(element3);
+                allStepsInTheDiagon.add(element4);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                    return true;
+                }
+            }
+        }
+        return result;
     }
 }
+
 

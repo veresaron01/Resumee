@@ -15,7 +15,10 @@ public class Model_GameLogic {
 
         int yDim;
         int xDim;
-        while ((yDim = Integer.parseInt(String.valueOf(controller.getInput()))) < 4 || (xDim = Integer.parseInt(String.valueOf(controller.getInput()))) < 4) {
+        /*while ((yDim = Integer.parseInt(String.valueOf(controller.getInput()))) < 4 || (xDim = Integer.parseInt(String.valueOf(controller.getInput()))) < 4) {
+            vct.printWrongFieldDimensionSizes();
+        }*/
+        while ((yDim = Integer.parseInt(String.valueOf(controller.getInput()))) < 4 || (xDim = Integer.parseInt(String.valueOf(controller.getInput()))) < 5) {
             vct.printWrongFieldDimensionSizes();
         }
 
