@@ -194,8 +194,8 @@ public class Model_GameUtility {
             exStepsStr.add(exAllStr);
         }
 
-        for (int z = 1; z < fieldDimensionX - 2; z++) {
-            for (int i = 1; i < fieldDimensionY - 2; i++) {
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = 1; i < fieldDimensionX - 2; i++) {
 
                 List<String> allStepsInTheDiagon = new ArrayList();
 
@@ -216,8 +216,8 @@ public class Model_GameUtility {
         }
 
         //bal lentrol, jobb fel
-        for (int z = 1; z < fieldDimensionX - 2; z++) {
-            for (int i = fieldDimensionY; i > 3; i--) {
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = fieldDimensionX; i > 3; i--) {
 
                 List<String> allStepsInTheDiagon = new ArrayList();
 
@@ -239,4 +239,5 @@ public class Model_GameUtility {
         return result;
     }
 }
+
 

@@ -24,3 +24,4 @@ Then Player #2 'O' does the same, until someone wins, or a draw game occurs. Aft
 the freshened table is drawed with the new signs in it. Each of the four winner signs must be the same kind, 
 must be on a single line either vertically, horisontally or diagonally. Everything is commented by the program.
 With winning or draw game occurence the program terminates.
+
