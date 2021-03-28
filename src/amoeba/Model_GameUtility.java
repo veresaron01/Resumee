@@ -127,7 +127,6 @@ public class Model_GameUtility {
         return result;
     }
 
-    /*
     //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol (X=1 || O=2)
     public boolean matcher(int XO) {
         List<Integer> YCoordinatesForXOrOSteps = new ArrayList();
@@ -195,8 +194,8 @@ public class Model_GameUtility {
             exStepsStr.add(exAllStr);
         }
 
-        for (int z = 1; z < fieldDimensionX - 2; z++) {
-            for (int i = 1; i < fieldDimensionY - 2; i++) {
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = 1; i < fieldDimensionX - 2; i++) {
 
                 List<String> allStepsInTheDiagon = new ArrayList();
 
@@ -217,8 +216,8 @@ public class Model_GameUtility {
         }
 
         //bal lentrol, jobb fel
-        for (int z = 1; z < fieldDimensionX - 2; z++) {
-            for (int i = fieldDimensionY; i > 3; i--) {
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = fieldDimensionX; i > 3; i--) {
 
                 List<String> allStepsInTheDiagon = new ArrayList();
 
@@ -238,7 +237,7 @@ public class Model_GameUtility {
             }
         }
         return result;
-    }*/
+    }/*
     //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol(X))
     public boolean matcherX() {
         boolean result = false;
@@ -296,8 +295,8 @@ public class Model_GameUtility {
             exStepsStr.add(exAllStr);
         }
 
-        for (int z = 1; z < fieldDimensionX - 2; z++) {
-            for (int i = 1; i < fieldDimensionY - 2; i++) {
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = 1; i < fieldDimensionX - 2; i++) {
 
                 List<String> allStepsInTheDiagon = new ArrayList();
 
@@ -318,8 +317,8 @@ public class Model_GameUtility {
         }
 
         //bal lentrol, jobb fel
-        for (int z = 1; z < fieldDimensionX - 2; z++) {
-            for (int i = fieldDimensionY; i > 3; i--) {
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = fieldDimensionX; i > 3; i--) {
 
                 List<String> allStepsInTheDiagon = new ArrayList();
 
@@ -332,6 +331,8 @@ public class Model_GameUtility {
                 allStepsInTheDiagon.add(element2);
                 allStepsInTheDiagon.add(element3);
                 allStepsInTheDiagon.add(element4);
+
+                System.out.println(allStepsInTheDiagon);
 
                 if (exStepsStr.containsAll(allStepsInTheDiagon)) {
                     return true;
@@ -398,8 +399,8 @@ public class Model_GameUtility {
             exStepsStr.add(exAllStr);
         }
 
-        for (int z = 1; z < fieldDimensionX - 2; z++) {
-            for (int i = 1; i < fieldDimensionY - 2; i++) {
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = 1; i < fieldDimensionX - 2; i++) {
 
                 List<String> allStepsInTheDiagon = new ArrayList();
 
@@ -420,28 +421,31 @@ public class Model_GameUtility {
         }
 
         //bal lentrol, jobb fel
-        for (int z = 1; z < fieldDimensionX - 2; z++) {
-            for (int i = fieldDimensionY; i > 3; i--) {
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = fieldDimensionX; i > 3; i--) {
 
-                List<String> allStepsInTheDiagon = new ArrayList();
+                List<String> allStepsInTheDiagon2 = new ArrayList();
 
                 String element1 = (z) + " " + (i);
                 String element2 = (z + 1) + " " + (i - 1);
                 String element3 = (z + 2) + " " + (i - 2);
                 String element4 = (z + 3) + " " + (i - 3);
 
-                allStepsInTheDiagon.add(element1);
-                allStepsInTheDiagon.add(element2);
-                allStepsInTheDiagon.add(element3);
-                allStepsInTheDiagon.add(element4);
+                allStepsInTheDiagon2.add(element1);
+                allStepsInTheDiagon2.add(element2);
+                allStepsInTheDiagon2.add(element3);
+                allStepsInTheDiagon2.add(element4);
 
-                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                System.out.println(allStepsInTheDiagon2);
+                System.out.println("z: " + z + "   i: " + i);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon2)) {
                     return true;
                 }
             }
         }
         return result;
-    }
+    }*/
 }
 
 
