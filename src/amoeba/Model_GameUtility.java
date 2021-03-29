@@ -15,6 +15,8 @@ public class Model_GameUtility {
     private List<Integer> ooCoordinatesY = new ArrayList();
     private List<Integer> ooCoordinatesX = new ArrayList();
     private List<String> allStepsInString = new ArrayList();
+    private List<String> exAllStepsStr = new ArrayList();
+    private List<String> ooAllStepsStr = new ArrayList();
 
     private List<List<String>> allMatchesInTheDiagons = new ArrayList();
 
@@ -22,6 +24,12 @@ public class Model_GameUtility {
         this.fieldDimensionY = fieldDimensionY;
         this.fieldDimensionX = fieldDimensionX;
         this.fieldSize = fieldDimensionY * fieldDimensionX;
+        fillTableWithSpaces();
+        getDiagonalMatches();
+
+    }
+
+    private void fillTableWithSpaces() {
 
         this.currentWholeField = new char[fieldDimensionY][fieldDimensionX];
         for (int i = 0; i < fieldDimensionY; i++) {
@@ -29,9 +37,6 @@ public class Model_GameUtility {
                 currentWholeField[i][j] = ' ';
             }
         }
-
-        getDiagonalMatches();
-
     }
 
     private void getDiagonalMatches() {
@@ -64,47 +69,6 @@ public class Model_GameUtility {
 
     }
 
-    public boolean checkDrawGame() {
-        return stepCounter == fieldSize;
-    }
-
-    public boolean checkValidity(int y, int x) {
-        String val = String.format("%s%s", y, x);
-        if (allStepsInString.contains(val) || y > fieldDimensionY || x > fieldDimensionX) {
-            return true;
-        }
-        allStepsInString.add(val);
-        return false;
-    }
-
-    public void addOoStep(int y, int x) {
-        ooCoordinatesY.add(y);
-        ooCoordinatesX.add(x);
-
-        stepCounter++;
-
-  //////////////////////////////////
-        List<String> exOrOoAllStepsStr = new ArrayList();
-        for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
-            String exOrOoStepStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
-            exOrOoAllStepsStr.add(exOrOoStepStr);
-        }
-    }
-
-    public void addExStep(int y, int x) {
-        exCoordinatesY.add(y);
-        exCoordinatesX.add(x);
-
-        stepCounter++;
-
-        //////////////////////////////////
-        List<String> exOrOoAllStepsStr = new ArrayList();
-        for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
-            String exOrOoStepStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
-            exOrOoAllStepsStr.add(exOrOoStepStr);
-        }
-    }
-
     public char[][] getCurrentWholeField() {
 
         for (int i = 0; i < exCoordinatesY.size(); i++) {
@@ -116,6 +80,33 @@ public class Model_GameUtility {
         }
 
         return currentWholeField;
+    }
+
+    public boolean checkValidity(int y, int x) {
+        String val = String.format("%s%s", y, x);
+        if (allStepsInString.contains(val) || y > fieldDimensionY || x > fieldDimensionX) {
+            return true;
+        }
+        allStepsInString.add(val);
+        return false;
+    }
+
+    public void addExStep(int y, int x) {
+        exCoordinatesY.add(y);
+        exCoordinatesX.add(x);
+        stepCounter++;
+        exAllStepsStr.add((y + 1) + " " + (x + 1));
+    }
+
+    public void addOoStep(int y, int x) {
+        ooCoordinatesY.add(y);
+        ooCoordinatesX.add(x);
+        stepCounter++;
+        ooAllStepsStr.add((y + 1) + " " + (x + 1));
+    }
+
+    public boolean checkDrawGame() {
+        return stepCounter == fieldSize;
     }
 
     public static boolean continuity(int[] a) {
@@ -131,13 +122,16 @@ public class Model_GameUtility {
     public boolean matcher(int XO) {
         List<Integer> YCoordinatesForXOrOSteps = new ArrayList();
         List<Integer> XCoordinatesForXOrOSteps = new ArrayList();
+        List<String> exOrOoAllStepsStr = new ArrayList();
 
         if (XO == 1) {
             YCoordinatesForXOrOSteps = exCoordinatesY;
             XCoordinatesForXOrOSteps = exCoordinatesX;
+            exOrOoAllStepsStr =exAllStepsStr;
         } else {
             YCoordinatesForXOrOSteps = ooCoordinatesY;
             XCoordinatesForXOrOSteps = ooCoordinatesX;
+            exOrOoAllStepsStr = ooAllStepsStr;
         }
 
         //vizszintesen talalat
@@ -185,17 +179,6 @@ public class Model_GameUtility {
         }
 
         //atlosan talalat
-
-        //////////////
-        List<String> exOrOoAllStepsStr = new ArrayList();
-        for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
-            String exOrOoStepStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
-            exOrOoAllStepsStr.add(exOrOoStepStr);
-        }
-
-
-
-
         for (List<String> matchInADiagon : allMatchesInTheDiagons) {
             if (exOrOoAllStepsStr.containsAll(matchInADiagon)) {
                 return true;
@@ -205,48 +188,3 @@ public class Model_GameUtility {
         return false;
     }
 }
-
-
-
-/*
-//atlosan talalat balfentrol, jobb le.
-        List<String> exStepsStr = new ArrayList();
-        for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
-            String exAllStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
-            exStepsStr.add(exAllStr);
-        }
-
-        for (int z = 1; z < fieldDimensionY - 2; z++) {
-            for (int i = 1; i < fieldDimensionX - 2; i++) {
-
-                List<String> allStepsInTheDiagon1 = List.of(
-                        String.format("%s %s", z, i),
-                        String.format("%s %s", (z + 1), (i + 1)),
-                        String.format("%s %s", (z + 2), (i + 2)),
-                        String.format("%s %s", (z + 3), (i + 3)));
-
-                if (exStepsStr.containsAll(allStepsInTheDiagon1)) {
-                    return true;
-                }
-            }
-        }
-
-        //bal lentrol, jobb fel
-        for (int z = 1; z < fieldDimensionY - 2; z++) {
-            for (int i = fieldDimensionX; i > 3; i--) {
-
-                List<String> allStepsInTheDiagon2 = List.of(
-                        String.format("%s %s", z, i),
-                        String.format("%s %s", (z + 1), (i - 1)),
-                        String.format("%s %s", (z + 2), (i - 2)),
-                        String.format("%s %s", (z + 3), (i - 3)));
-
-                if (exStepsStr.containsAll(allStepsInTheDiagon2)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
- */
-
