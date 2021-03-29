@@ -21,5 +21,4 @@ public class View_GameField {
 
     }
 
-
 }

@@ -8,6 +8,7 @@ public class Model_GameUtility {
     private int fieldDimensionX;
     private int fieldSize;
     private int stepCounter = 0;
+    private char[][] currentWholeField;
 
     private List<Integer> exCoordinatesY = new ArrayList();
     private List<Integer> exCoordinatesX = new ArrayList();
@@ -21,6 +22,13 @@ public class Model_GameUtility {
         this.fieldDimensionY = fieldDimensionY;
         this.fieldDimensionX = fieldDimensionX;
         this.fieldSize = fieldDimensionY * fieldDimensionX;
+
+        this.currentWholeField = new char[fieldDimensionY][fieldDimensionX];
+        for (int i = 0; i < fieldDimensionY; i++) {
+            for (int j = 0; j < fieldDimensionX; j++) {
+                currentWholeField[i][j] = ' ';
+            }
+        }
     }
 
     public int getFieldDimensionY() {
@@ -65,14 +73,6 @@ public class Model_GameUtility {
     }
 
     public char[][] getCurrentWholeField() {
-
-        char[][] currentWholeField = new char[fieldDimensionY][fieldDimensionX];
-
-        for (int i = 0; i < fieldDimensionY; i++) {
-            for (int j = 0; j < fieldDimensionX; j++) {
-                currentWholeField[i][j] = ' ';
-            }
-        }
 
         for (int i = 0; i < exCoordinatesY.size(); i++) {
             currentWholeField[exCoordinatesY.get(i)][exCoordinatesX.get(i)] = 'X';
