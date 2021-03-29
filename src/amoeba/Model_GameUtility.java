@@ -14,8 +14,6 @@ public class Model_GameUtility {
     private List<Integer> exCoordinatesX = new ArrayList();
     private List<Integer> ooCoordinatesY = new ArrayList();
     private List<Integer> ooCoordinatesX = new ArrayList();
-    private List<Integer> allCoordinatesY = new ArrayList();
-    private List<Integer> allCoordinatesX = new ArrayList();
     private List<String> allStepsInString = new ArrayList();
 
     public Model_GameUtility(int fieldDimensionY, int fieldDimensionX) {
@@ -56,18 +54,12 @@ public class Model_GameUtility {
         ooCoordinatesY.add(y);
         ooCoordinatesX.add(x);
 
-        allCoordinatesY.add(y);
-        allCoordinatesX.add(x);
-
         stepCounter++;
     }
 
     public void addExStep(int y, int x) {
         exCoordinatesY.add(y);
         exCoordinatesX.add(x);
-
-        allCoordinatesY.add(y);
-        allCoordinatesX.add(x);
 
         stepCounter++;
     }

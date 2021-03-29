@@ -15,9 +15,8 @@ public class Model_GameLogic {
         int yDim;
         int xDim;
 
-        while ((yDim = Integer.parseInt(String.valueOf(cus.getInput()))) < 4 || (xDim = Integer.parseInt(String.valueOf(cus.getInput()))) < 4) {
-            vct.printWrongFieldDimensionSizes();
-        }
+        yDim = Integer.parseInt(String.valueOf(cus.getInput()));
+        xDim = Integer.parseInt(String.valueOf(cus.getInput()));
 
         Model_TwoPlayerGame t = new Model_TwoPlayerGame(yDim, xDim);
 
