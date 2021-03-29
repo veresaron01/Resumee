@@ -30,6 +30,12 @@ public class Model_GameUtility {
             }
         }
 
+        getDiagonalMatches();
+
+    }
+
+    private void getDiagonalMatches() {
+
         //atlosan lehetseges talalatok bal fentrol, jobb le.
         for (int z = 1; z < fieldDimensionY - 2; z++) {
             for (int i = 1; i < fieldDimensionX - 2; i++) {
@@ -56,15 +62,6 @@ public class Model_GameUtility {
             }
         }
 
-
-    }
-
-    public int getFieldDimensionY() {
-        return fieldDimensionY;
-    }
-
-    public int getFieldDimensionX() {
-        return fieldDimensionX;
     }
 
     public boolean checkDrawGame() {
@@ -85,6 +82,13 @@ public class Model_GameUtility {
         ooCoordinatesX.add(x);
 
         stepCounter++;
+
+  //////////////////////////////////
+        List<String> exOrOoAllStepsStr = new ArrayList();
+        for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
+            String exOrOoStepStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
+            exOrOoAllStepsStr.add(exOrOoStepStr);
+        }
     }
 
     public void addExStep(int y, int x) {
@@ -92,6 +96,13 @@ public class Model_GameUtility {
         exCoordinatesX.add(x);
 
         stepCounter++;
+
+        //////////////////////////////////
+        List<String> exOrOoAllStepsStr = new ArrayList();
+        for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
+            String exOrOoStepStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
+            exOrOoAllStepsStr.add(exOrOoStepStr);
+        }
     }
 
     public char[][] getCurrentWholeField() {
@@ -173,15 +184,20 @@ public class Model_GameUtility {
             }
         }
 
-        //atlosan talalat balfentrol, jobb le.
-        List<String> exOrOoStepsStr = new ArrayList();
+        //atlosan talalat
+
+        //////////////
+        List<String> exOrOoAllStepsStr = new ArrayList();
         for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
             String exOrOoStepStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
-            exOrOoStepsStr.add(exOrOoStepStr);
+            exOrOoAllStepsStr.add(exOrOoStepStr);
         }
 
+
+
+
         for (List<String> matchInADiagon : allMatchesInTheDiagons) {
-            if (exOrOoStepsStr.containsAll(matchInADiagon)) {
+            if (exOrOoAllStepsStr.containsAll(matchInADiagon)) {
                 return true;
             }
         }
