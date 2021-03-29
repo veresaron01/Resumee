@@ -16,6 +16,8 @@ public class Model_GameUtility {
     private List<Integer> ooCoordinatesX = new ArrayList();
     private List<String> allStepsInString = new ArrayList();
 
+    private List<List<String>> allMatchesInTheDiagons = new ArrayList();
+
     public Model_GameUtility(int fieldDimensionY, int fieldDimensionX) {
         this.fieldDimensionY = fieldDimensionY;
         this.fieldDimensionX = fieldDimensionX;
@@ -27,6 +29,34 @@ public class Model_GameUtility {
                 currentWholeField[i][j] = ' ';
             }
         }
+
+        //atlosan lehetseges talalatok bal fentrol, jobb le.
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = 1; i < fieldDimensionX - 2; i++) {
+
+                List<String> oneMatchOnADiagon = List.of(
+                        String.format("%s %s", z, i),
+                        String.format("%s %s", (z + 1), (i + 1)),
+                        String.format("%s %s", (z + 2), (i + 2)),
+                        String.format("%s %s", (z + 3), (i + 3)));
+                allMatchesInTheDiagons.add(oneMatchOnADiagon);
+            }
+        }
+
+        //atlosan lehetseges talalatok, bal lentrol, jobb fel
+        for (int z = 1; z < fieldDimensionY - 2; z++) {
+            for (int i = fieldDimensionX; i > 3; i--) {
+
+                List<String> oneStepInADiagon = List.of(
+                        String.format("%s %s", z, i),
+                        String.format("%s %s", (z + 1), (i - 1)),
+                        String.format("%s %s", (z + 2), (i - 2)),
+                        String.format("%s %s", (z + 3), (i - 3)));
+                allMatchesInTheDiagons.add(oneStepInADiagon);
+            }
+        }
+
+
     }
 
     public int getFieldDimensionY() {
@@ -42,7 +72,7 @@ public class Model_GameUtility {
     }
 
     public boolean checkValidity(int y, int x) {
-        String val = y + "" + x;
+        String val = String.format("%s%s", y, x);
         if (allStepsInString.contains(val) || y > fieldDimensionY || x > fieldDimensionX) {
             return true;
         }
@@ -94,14 +124,13 @@ public class Model_GameUtility {
         if (XO == 1) {
             YCoordinatesForXOrOSteps = exCoordinatesY;
             XCoordinatesForXOrOSteps = exCoordinatesX;
-        } else if (XO == 2){
+        } else {
             YCoordinatesForXOrOSteps = ooCoordinatesY;
             XCoordinatesForXOrOSteps = ooCoordinatesX;
         }
 
         //vizszintesen talalat
-        List<Integer> list1 = new ArrayList();
-        list1.addAll(YCoordinatesForXOrOSteps);
+        List<Integer> list1 = new ArrayList(YCoordinatesForXOrOSteps);
         Collections.sort(list1);
 
         for (int i = 0; i < list1.size(); i++) {
@@ -123,8 +152,7 @@ public class Model_GameUtility {
         }
 
         //fuggolegesen talalat
-        List<Integer> list2 = new ArrayList();
-        list2.addAll(XCoordinatesForXOrOSteps);
+        List<Integer> list2 = new ArrayList(XCoordinatesForXOrOSteps);
         Collections.sort(list2);
 
         for (int i = 0; i < list2.size(); i++) {
@@ -146,6 +174,26 @@ public class Model_GameUtility {
         }
 
         //atlosan talalat balfentrol, jobb le.
+        List<String> exOrOoStepsStr = new ArrayList();
+        for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
+            String exOrOoStepStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
+            exOrOoStepsStr.add(exOrOoStepStr);
+        }
+
+        for (List<String> matchInADiagon : allMatchesInTheDiagons) {
+            if (exOrOoStepsStr.containsAll(matchInADiagon)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+
+
+/*
+//atlosan talalat balfentrol, jobb le.
         List<String> exStepsStr = new ArrayList();
         for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
             String exAllStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
@@ -155,19 +203,13 @@ public class Model_GameUtility {
         for (int z = 1; z < fieldDimensionY - 2; z++) {
             for (int i = 1; i < fieldDimensionX - 2; i++) {
 
-                List<String> allStepsInTheDiagon = new ArrayList();
+                List<String> allStepsInTheDiagon1 = List.of(
+                        String.format("%s %s", z, i),
+                        String.format("%s %s", (z + 1), (i + 1)),
+                        String.format("%s %s", (z + 2), (i + 2)),
+                        String.format("%s %s", (z + 3), (i + 3)));
 
-                String element1 = (z) + " " + (i);
-                String element2 = (z + 1) + " " + (i + 1);
-                String element3 = (z + 2) + " " + (i + 2);
-                String element4 = (z + 3) + " " + (i + 3);
-
-                allStepsInTheDiagon.add(element1);
-                allStepsInTheDiagon.add(element2);
-                allStepsInTheDiagon.add(element3);
-                allStepsInTheDiagon.add(element4);
-
-                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                if (exStepsStr.containsAll(allStepsInTheDiagon1)) {
                     return true;
                 }
             }
@@ -177,25 +219,18 @@ public class Model_GameUtility {
         for (int z = 1; z < fieldDimensionY - 2; z++) {
             for (int i = fieldDimensionX; i > 3; i--) {
 
-                List<String> allStepsInTheDiagon = new ArrayList();
+                List<String> allStepsInTheDiagon2 = List.of(
+                        String.format("%s %s", z, i),
+                        String.format("%s %s", (z + 1), (i - 1)),
+                        String.format("%s %s", (z + 2), (i - 2)),
+                        String.format("%s %s", (z + 3), (i - 3)));
 
-                String element1 = (z) + " " + (i);
-                String element2 = (z + 1) + " " + (i - 1);
-                String element3 = (z + 2) + " " + (i - 2);
-                String element4 = (z + 3) + " " + (i - 3);
-
-                allStepsInTheDiagon.add(element1);
-                allStepsInTheDiagon.add(element2);
-                allStepsInTheDiagon.add(element3);
-                allStepsInTheDiagon.add(element4);
-
-                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                if (exStepsStr.containsAll(allStepsInTheDiagon2)) {
                     return true;
                 }
             }
         }
         return false;
     }
-}
-
+ */
 

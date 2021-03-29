@@ -18,9 +18,9 @@ public class Model_GameLogic {
         yDim = Integer.parseInt(String.valueOf(cus.getInput()));
         xDim = Integer.parseInt(String.valueOf(cus.getInput()));
 
-        Model_TwoPlayerGame t = new Model_TwoPlayerGame(yDim, xDim);
+        Model_TwoPlayerGame twoPlayerGame = new Model_TwoPlayerGame(yDim, xDim);
 
-        t.initializeTwoPlayerGame(yDim, xDim);
+        twoPlayerGame.initializeTwoPlayerGame(yDim, xDim);
 
     }
 
