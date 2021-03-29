@@ -21,22 +21,10 @@ public class Controller_UserInput {
         return c;
     }
 
-    public char getStepXInput(String reg) throws IOException {
+    public char getStepInput(int reg) throws IOException {
         String regex = "[1-" + reg + "]";
-        char result = ' ';
+        char result;
         System.out.println(regex);
-
-        while (!String.valueOf((result = getInputFromConsole())).matches(regex)) {
-            System.out.println("Number from 1 - " + reg);
-        }
-
-        return result;
-    }
-
-    public char getStepOInput(String reg) throws IOException {
-        String regex = "[1-" + reg + "]";
-        System.out.println(regex);
-        char result = ' ';
 
         while (!String.valueOf((result = getInputFromConsole())).matches(regex)) {
             System.out.println("Number from 1 - " + reg);
@@ -46,7 +34,7 @@ public class Controller_UserInput {
     }
 
     public char getInput() throws IOException {
-        char result = ' ';
+        char result;
 
         while (!String.valueOf((result = getInputFromConsole())).matches("[4-8]")) {
             System.out.println("Number from 4 - 8");
