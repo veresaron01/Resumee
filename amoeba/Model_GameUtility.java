@@ -98,6 +98,7 @@ public class Model_GameUtility {
         exAllStepsStr.add((y + 1) + " " + (x + 1));
     }
 
+<<<<<<< HEAD
     public void addOoStep(int y, int x) {
         ooCoordinatesY.add(y);
         ooCoordinatesX.add(x);
@@ -118,10 +119,13 @@ public class Model_GameUtility {
         return true;
     }
 
+=======
+>>>>>>> main
     //talalatok megtalalasa (4 darab egy egyenes menten megszakitas nelkul, egy fajtabol (X=1 || O=2)
     public boolean matcher(int XO) {
         List<Integer> YCoordinatesForXOrOSteps = new ArrayList();
         List<Integer> XCoordinatesForXOrOSteps = new ArrayList();
+<<<<<<< HEAD
         List<String> exOrOoAllStepsStr = new ArrayList();
 
         if (XO == 1) {
@@ -136,6 +140,21 @@ public class Model_GameUtility {
 
         //vizszintesen talalat
         List<Integer> list1 = new ArrayList(YCoordinatesForXOrOSteps);
+=======
+
+        boolean result = false;
+        if (XO == 1) {
+            YCoordinatesForXOrOSteps = exCoordinatesY;
+            XCoordinatesForXOrOSteps = exCoordinatesX;
+        } else if (XO == 2){
+            YCoordinatesForXOrOSteps = ooCoordinatesY;
+            XCoordinatesForXOrOSteps = ooCoordinatesX;
+        }
+
+        //vizszintesen talalat
+        List<Integer> list1 = new ArrayList();
+        list1.addAll(YCoordinatesForXOrOSteps);//exCoordinatesY
+>>>>>>> main
         Collections.sort(list1);
 
         for (int i = 0; i < list1.size(); i++) {
@@ -144,7 +163,11 @@ public class Model_GameUtility {
             int[] forCheckConty = new int[4];
 
             for (int j = 0; j < list1.size(); j++) {
+<<<<<<< HEAD
                 if (list1.get(i).equals(list1.get(j)) && continuityCounterY < 4) {
+=======
+                if (list1.get(i) == list1.get(j) && continuityCounterY < 4) {
+>>>>>>> main
                     forCheckConty[continuityCounterY] = XCoordinatesForXOrOSteps.get(j);
                     continuityCounterY++;
                 }
@@ -157,7 +180,12 @@ public class Model_GameUtility {
         }
 
         //fuggolegesen talalat
+<<<<<<< HEAD
         List<Integer> list2 = new ArrayList(XCoordinatesForXOrOSteps);
+=======
+        List<Integer> list2 = new ArrayList();
+        list2.addAll(XCoordinatesForXOrOSteps);
+>>>>>>> main
         Collections.sort(list2);
 
         for (int i = 0; i < list2.size(); i++) {
@@ -166,7 +194,11 @@ public class Model_GameUtility {
             int[] forCheckContx = new int[4];
 
             for (int j = 0; j < list2.size(); j++) {
+<<<<<<< HEAD
                 if (list2.get(i).equals(list2.get(j)) && continuityCounterX < 4) {
+=======
+                if (list2.get(i) == list2.get(j) && continuityCounterX < 4) {
+>>>>>>> main
                     forCheckContx[continuityCounterX] = YCoordinatesForXOrOSteps.get(j);
                     continuityCounterX++;
                 }
@@ -178,10 +210,38 @@ public class Model_GameUtility {
             }
         }
 
+<<<<<<< HEAD
         //atlosan talalat
         for (List<String> matchInADiagon : allMatchesInTheDiagons) {
             if (exOrOoAllStepsStr.containsAll(matchInADiagon)) {
                 return true;
+=======
+        //atlosan talalat balfentrol, jobb le.
+        List<String> exStepsStr = new ArrayList();
+        for (int i = 0; i < YCoordinatesForXOrOSteps.size(); i++) {
+            String exAllStr = (YCoordinatesForXOrOSteps.get(i) + 1) + " " + (XCoordinatesForXOrOSteps.get(i) + 1);
+            exStepsStr.add(exAllStr);
+        }
+
+        for (int z = 1; z < fieldDimensionX - 2; z++) {
+            for (int i = 1; i < fieldDimensionY - 2; i++) {
+
+                List<String> allStepsInTheDiagon = new ArrayList();
+
+                String element1 = (z) + " " + (i);
+                String element2 = (z + 1) + " " + (i + 1);
+                String element3 = (z + 2) + " " + (i + 2);
+                String element4 = (z + 3) + " " + (i + 3);
+
+                allStepsInTheDiagon.add(element1);
+                allStepsInTheDiagon.add(element2);
+                allStepsInTheDiagon.add(element3);
+                allStepsInTheDiagon.add(element4);
+
+                if (exStepsStr.containsAll(allStepsInTheDiagon)) {
+                    return true;
+                }
+>>>>>>> main
             }
         }
 
