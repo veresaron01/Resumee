@@ -48,15 +48,10 @@ public class Model_TwoPlayerGame {
         while (!winnerFound) {
             //first player
 
-<<<<<<< HEAD
             takePlayerStep(1);
 
             if (tpm.matcher(1)) {
                 View_ConsoleTexts.printWinner(1);
-=======
-            if (tpm.matcher(1)) {
-                View_ConsoleTexts.printWinner1();
->>>>>>> main
                 winnerFound = true;
                 continue;
             }
@@ -70,15 +65,8 @@ public class Model_TwoPlayerGame {
 
             takePlayerStep(2);
 
-<<<<<<< HEAD
             if (tpm.matcher(2)) {
                 View_ConsoleTexts.printWinner(2);
-=======
-            vgf.printField(fieldDimensionY, fieldDimensionX, wholeField1);
-
-            if (tpm.matcher(2)) {
-                View_ConsoleTexts.printWinner2();
->>>>>>> main
                 winnerFound = true;
                 continue;
             }
