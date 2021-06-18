@@ -24,32 +24,15 @@ public class AIPlayer {
     }
 
     public List<String> findTheEndPointsOfDiagonalContinuousMatches(List<List<String>> diagonsPossible, List<String> exOrOoAllStepsStr) { //egzsyerusites egz for ciklusra
-        List<Integer> foundDiaMatchesInString2 = new ArrayList<>();
         List<String> foundDiaMatchesInString = new ArrayList<>();
-
-
-        int indexOfParticularLineSegment = -1;
-
         for (int i = 0; i < diagonsPossible.size(); i++){
             if (exOrOoAllStepsStr.containsAll(diagonsPossible.get(i))){
-                indexOfParticularLineSegment = i;
-                //foundDiaMatchesInString2.add(indexOfParticularLineSegment);
-
-                List<String> oneMatch = diagonsPossible.get(indexOfParticularLineSegment);
+                List<String> oneMatch = diagonsPossible.get(i);
                 String ends = oneMatch.get(0) + " " + oneMatch.get(oneMatch.size()-1);
                 foundDiaMatchesInString.add(ends);
-
             }
         }
-
-//        for (int i = 0; i < foundDiaMatchesInString2.size(); i++) {
-//            List<String> oneMatch = diagonsPossible.get(foundDiaMatchesInString2.get(i));
-//            String ends = oneMatch.get(0) + " " + oneMatch.get(oneMatch.size()-1);
-//            foundDiaMatchesInString.add(ends);
-//        }
-
         return foundDiaMatchesInString;
-
     }
 
     private static String getAfterEndsPoints(String twoPoints){

@@ -1,0 +1,97 @@
+
+J
+java:S3740"/Provide the parametrized type for this generic.(¬´Ã˜ûÿÿÿÿ
+E
+java:S3740"/Provide the parametrized type for this generic.(¡ÈïÒ
+E
+java:S3740"/Provide the parametrized type for this generic.(¥îà–
+E
+java:S3740"/Provide the parametrized type for this generic.(œÌù¥
+E
+java:S3740"/Provide the parametrized type for this generic.(œıÁ¹
+E
+java:S3740"/Provide the parametrized type for this generic.(Ô…ï’
+J
+java:S3740"/Provide the parametrized type for this generic.(êàÍËúÿÿÿÿ
+J
+java:S3740"/Provide the parametrized type for this generic.(¢Ìåùÿÿÿÿ
+k	java:S117x"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ıÕ–ùşÿÿÿÿ
+f	java:S117y"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø£‡›
+f	java:S117z"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı—¯à
+g	java:S117Ô"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æ˜‚Õ
+g	java:S117×"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø£‡›
+g	java:S117Ø"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı—¯à
+E
+java:S6212""/Declare this local variable with "var" instead.(—Àë“
+E
+java:S6212#"/Declare this local variable with "var" instead.(óùÍú
+E
+java:S6212,"/Declare this local variable with "var" instead.(‹ºÑ
+J
+java:S6212-"/Declare this local variable with "var" instead.(İ¶ªøÿÿÿÿ
+J
+java:S62120"/Declare this local variable with "var" instead.(¢Ò¨Æúÿÿÿÿ
+E
+java:S62128"/Declare this local variable with "var" instead.(‹ºÑ
+J
+java:S6212<"/Declare this local variable with "var" instead.(¢Ò¨Æúÿÿÿÿ
+J
+java:S6212G"/Declare this local variable with "var" instead.(Ñª¶şÿÿÿÿ
+E
+java:S6212K"/Declare this local variable with "var" instead.(Ìî™µ
+J
+java:S6212S"/Declare this local variable with "var" instead.(¬Àœ¸øÿÿÿÿ
+Q	java:S125U"<This block of commented-out lines of code should be removed.(Ôƒ–
+E
+java:S6212o"/Declare this local variable with "var" instead.( ì‘Ş
+m
+java:S3776x"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(ıÕ–ùşÿÿÿÿ
+E
+java:S6212‹"/Declare this local variable with "var" instead.(Ëµ
+E
+java:S6212"/Declare this local variable with "var" instead.(¶ÑÆT
+F
+java:S6212"/Declare this local variable with "var" instead.(¹‘û—
+F
+java:S6212¡"/Declare this local variable with "var" instead.(¹”ã
+F
+java:S6212£"/Declare this local variable with "var" instead.(€ŒĞ”
+K
+java:S6212¤"/Declare this local variable with "var" instead.(ËÌ ‰ûÿÿÿÿ
+]
+java:S1126»"AReplace this if-then-else statement by a single return statement.(øÌÄşÿÿÿÿ
+R	java:S125´"<This block of commented-out lines of code should be removed.(ª¸Ş’
+F
+java:S6212Ê"/Declare this local variable with "var" instead.(ÒÒ•ë
+a
+java:S1854Ş"ERemove this useless assignment to local variable "exOrOoAllStepsStr".(¥Ş£äüÿÿÿÿ
+\
+java:S1854â"ERemove this useless assignment to local variable "exOrOoAllStepsStr".(²Æà
+i
+java:S3776Ô"RRefactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.(æ˜‚Õ
+K
+java:S6212é"/Declare this local variable with "var" instead.(Û†ö¦ıÿÿÿÿ
+E
+java:S6212ë"/Declare this local variable with "var" instead.(¶ÑÆT
+K
+java:S6212ì"/Declare this local variable with "var" instead.(ıœ›ùÿÿÿÿ
+F
+java:S6212í"/Declare this local variable with "var" instead.(¿‹”
+K
+java:S6212ú"/Declare this local variable with "var" instead.(€ê±Õúÿÿÿÿ
+F
+java:S6212û"/Declare this local variable with "var" instead.(¶Ë–¬
+K
+java:S6212‡"/Declare this local variable with "var" instead.(şå˜Ñıÿÿÿÿ
+F
+java:S6212‰"/Declare this local variable with "var" instead.(€ŒĞ”
+K
+java:S6212Š"/Declare this local variable with "var" instead.(ÂÙ›¯ıÿÿÿÿ
+F
+java:S6212‹"/Declare this local variable with "var" instead.(Š÷½Å
+K
+java:S6212™"/Declare this local variable with "var" instead.(€ê±Õúÿÿÿÿ
+F
+java:S6212š"/Declare this local variable with "var" instead.(ª±Â»
+R
+java:S1481Ù"6Remove this unused "exOrOoAllStepsStr" local variable.(ÅÏåóûÿÿÿÿ
