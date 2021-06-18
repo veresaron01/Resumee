@@ -1,14 +1,14 @@
-package amoeba;
+package amoeba.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Controller_UserInput {
+public class UserInput {
 
     BufferedReader reader;
 
-    public Controller_UserInput() {
+    public UserInput() {
         reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
@@ -21,22 +21,29 @@ public class Controller_UserInput {
         return c;
     }
 
-    public char getStepInput(int reg) throws IOException {
+    public int getStepInput(int reg) throws IOException {
         String regex = "[1-" + reg + "]";
-        char result;
+        char inputChar;
         System.out.println(regex);
 
-        while (!String.valueOf((result = getInputFromConsole())).matches(regex)) {
+        while (!String.valueOf((inputChar = getInputFromConsole())).matches(regex)) {
             System.out.println("Number from 1 - " + reg);
         }
+        int result = Integer.parseInt(String.valueOf(inputChar));
 
         return result;
     }
 
-    public char getInput() throws IOException {
-        char result;
+    public int getRangeInput(int min, int max) throws IOException {
+        int result = 0;
 
-        while (!String.valueOf((result = getInputFromConsole())).matches("[4-8]")) {
+        boolean wrongNumber = true;
+        while (wrongNumber) {
+            result = Integer.parseInt(String.valueOf(getInputFromConsole()));
+            if (result <= max && result >= min){
+                wrongNumber = false;
+                break;
+            }
             System.out.println("Number from 4 - 8");
         }
         return result;

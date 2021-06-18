@@ -1,12 +1,14 @@
 package amoeba;
 
+import amoeba.model.GameLogic;
+
 import java.io.IOException;
 
 public class MainClass {
 
     public static void main(String[] args) throws IOException {
 
-        new Model_GameLogic().startGame();
+        new GameLogic().startGame();
 
     }
 
