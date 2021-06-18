@@ -19,8 +19,37 @@ public class AIPlayer {
         gameUtility.getDiagonalMatches(2, allPartMatchesInTheDiagons2);
     }
 
-    public void aiTakeAStep (int XO12) { // XO12 arra vonatkozik ki kezd, 1-es: AI = O
+    public void aiTakeAStep (int XO12) { // XO12 arra vonatkozik ki kezd, 1-es: AI = O    ||    2-es: AI = X
         //gameUtility.exAllStepsStr
+    }
+
+    public int[] centerOfTable(){
+
+        return new int[2];
+    }
+
+    public int[] centerOfAIPointsGravity(){ // tesytelni h nincs e baj h double-t ad es atkasytolja int-re
+        int[] center = new int[2];
+        List<Integer> aIStepsY;
+        List<Integer> aIStepsX;
+        if(whoStarts == 1){
+            aIStepsY = gameUtility.ooCoordinatesY;
+            aIStepsX = gameUtility.ooCoordinatesX;
+        } else{
+            aIStepsY = gameUtility.exCoordinatesY;
+            aIStepsX = gameUtility.exCoordinatesX;
+        }
+        int avgY = 0;
+        int avgX = 0;
+        for (Integer i : aIStepsY){
+            avgY = avgY + i;
+        }
+        for (Integer i : aIStepsX){
+            avgX = avgX + i;
+        }
+        center[0] = avgY/(aIStepsY.size());
+        center[1] = avgX/(aIStepsX.size());
+        return center;
     }
 
     public List<String> getAfterEndPointsList(List<List<String>> diagonsPossible, List<String> exOrOoAllStepsStr){

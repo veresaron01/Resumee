@@ -10,10 +10,10 @@ public class GameUtility {
     private int stepCounter = 0;
     private char[][] currentWholeTable;
 
-    private List<Integer> exCoordinatesY = new ArrayList();
-    private List<Integer> exCoordinatesX = new ArrayList();
-    private List<Integer> ooCoordinatesY = new ArrayList();
-    private List<Integer> ooCoordinatesX = new ArrayList();
+    protected List<Integer> exCoordinatesY = new ArrayList();
+    protected List<Integer> exCoordinatesX = new ArrayList();
+    protected List<Integer> ooCoordinatesY = new ArrayList();
+    protected List<Integer> ooCoordinatesX = new ArrayList();
     protected List<String> allStepsInString = new ArrayList();
     protected List<String> exStepsInString = new ArrayList();
     protected List<String> ooStepsInString = new ArrayList();
