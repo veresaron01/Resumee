@@ -4,8 +4,8 @@ import java.util.*;
 
 public class GameUtility {
 
-    private int fieldDimensionY;
-    private int fieldDimensionX;
+    public int tableDimensionY;
+    public int tableDimensionX;
     private int fieldSize;
     private int stepCounter = 0;
     private char[][] currentWholeTable;
@@ -15,17 +15,17 @@ public class GameUtility {
     private List<Integer> ooCoordinatesY = new ArrayList();
     private List<Integer> ooCoordinatesX = new ArrayList();
     protected List<String> allStepsInString = new ArrayList();
-    protected List<String> exAllStepsStr = new ArrayList();
-    protected List<String> ooAllStepsStr = new ArrayList();
+    protected List<String> exStepsInString = new ArrayList();
+    protected List<String> ooStepsInString = new ArrayList();
 
     private List<List<String>> allMatchesInTheDiagons = new ArrayList();
     private List<List<String>> allMatchesHorizontally = new ArrayList<>();
     private List<List<String>> allMatchesVertically = new ArrayList<>();
 
-    public GameUtility(int fieldDimensionY, int fieldDimensionX) {
-        this.fieldDimensionY = fieldDimensionY;
-        this.fieldDimensionX = fieldDimensionX;
-        this.fieldSize = fieldDimensionY * fieldDimensionX;
+    public GameUtility(int tableDimensionY, int tableDimensionX) {
+        this.tableDimensionY = tableDimensionY;
+        this.tableDimensionX = tableDimensionX;
+        this.fieldSize = tableDimensionY * tableDimensionX;
         fillTableWithSpaces();
         getDiagonalMatches(4, allMatchesInTheDiagons);
         getHorizontalMatches(4 ,allMatchesHorizontally);
@@ -34,9 +34,9 @@ public class GameUtility {
 
     private void fillTableWithSpaces() {
 
-        this.currentWholeTable = new char[fieldDimensionY][fieldDimensionX];
-        for (int i = 0; i < fieldDimensionY; i++) {
-            for (int j = 0; j < fieldDimensionX; j++) {
+        this.currentWholeTable = new char[tableDimensionY][tableDimensionX];
+        for (int i = 0; i < tableDimensionY; i++) {
+            for (int j = 0; j < tableDimensionX; j++) {
                 currentWholeTable[i][j] = ' ';
             }
         }
@@ -45,8 +45,8 @@ public class GameUtility {
     public void getDiagonalMatches(int length, List<List<String>> diagonalPartMatches) {
 
         //atlosan lehetseges talalatok bal fentrol, jobb le.
-        for (int i = 0; i < fieldDimensionY - 3 + 4 - length; i++) {
-            for (int j = 0; j < fieldDimensionX - 3 + 4 - length; j++) {
+        for (int i = 0; i < tableDimensionY - 3 + 4 - length; i++) {
+            for (int j = 0; j < tableDimensionX - 3 + 4 - length; j++) {
 
                 List<String> oneMatchOnADiagon = new ArrayList<>();
                 for (int k = 1; k < length + 1; k++){
@@ -57,8 +57,8 @@ public class GameUtility {
         }
 
         //atlosan lehetseges talalatok, bal lentrol, jobb fel
-        for (int i = 0; i < fieldDimensionY - 3 + 4 - length; i++) {
-            for (int j = fieldDimensionX + 1; j > length; j--) {
+        for (int i = 0; i < tableDimensionY - 3 + 4 - length; i++) {
+            for (int j = tableDimensionX + 1; j > length; j--) {
 
                 List<String> oneMatchOnADiagon = new ArrayList<>();
                 for (int k = 1; k < length + 1; k++){
@@ -71,8 +71,8 @@ public class GameUtility {
     }
 
     public void getHorizontalMatches(int length, List<List<String>> partMatches){
-        for (int i = 1; i < fieldDimensionY + 1; i++){
-            for (int j = 0; j < fieldDimensionX - length + 1; j++){
+        for (int i = 1; i < tableDimensionY + 1; i++){
+            for (int j = 0; j < tableDimensionX - length + 1; j++){
 
                 List<String> oneMatchOnAHorizontalLine = new ArrayList<>();
                 for (int k = 1; k < length + 1; k++){
@@ -84,8 +84,8 @@ public class GameUtility {
     }
 
     public void getVerticalMatches(int length, List<List<String>> partMatches){
-        for (int i = 1; i < fieldDimensionX + 1; i++){
-            for (int j = 0; j < fieldDimensionY - length + 1; j++){
+        for (int i = 1; i < tableDimensionX + 1; i++){
+            for (int j = 0; j < tableDimensionY - length + 1; j++){
 
                 List<String> oneMatchOnAVerticalLine = new ArrayList<>();
                 for (int k = 1; k < length + 1; k++){
@@ -110,7 +110,7 @@ public class GameUtility {
     }
 
     public boolean checkValidity(int y, int x) {
-        String val = String.format("%s%s", y, x);
+        String val = String.format("%s %s", y, x);
 
         if (allStepsInString.contains(val)){// || y > fieldDimensionY || x > fieldDimensionX) {
             return true;
@@ -123,14 +123,14 @@ public class GameUtility {
         exCoordinatesY.add(y);
         exCoordinatesX.add(x);
         stepCounter++;
-        exAllStepsStr.add((y + 1) + " " + (x + 1));
+        exStepsInString.add((y + 1) + " " + (x + 1));
     }
 
     public void addOoStep(int y, int x) {
         ooCoordinatesY.add(y);
         ooCoordinatesX.add(x);
         stepCounter++;
-        ooAllStepsStr.add((y + 1) + " " + (x + 1));
+        ooStepsInString.add((y + 1) + " " + (x + 1));
     }
 
     public boolean checkDrawGame() {
@@ -150,9 +150,9 @@ public class GameUtility {
     public boolean matcher(int XO) {
         List<String> exOrOoAllStepsStr;
         if (XO == 1) {
-            exOrOoAllStepsStr =exAllStepsStr;
+            exOrOoAllStepsStr = exStepsInString;
         } else {
-            exOrOoAllStepsStr = ooAllStepsStr;
+            exOrOoAllStepsStr = ooStepsInString;
         }
         //vizszintes talalat
         int a = findIndexesOfMatchesWithDifferentLength(allMatchesHorizontally, 0, exOrOoAllStepsStr);
@@ -171,7 +171,8 @@ public class GameUtility {
         return false;
     }
 
-    protected int findIndexesOfMatchesWithDifferentLength(List<List<String>> allMatchesInDifferentDirectionsDifferentLongs, int searchStartBarrior_fromMinus1, List<String> exOrOoAllStepsStr) { // barrior talan kiveheto
+    // barrior talan kiveheto
+    protected int findIndexesOfMatchesWithDifferentLength(List<List<String>> allMatchesInDifferentDirectionsDifferentLongs, int searchStartBarrior_fromMinus1, List<String> exOrOoAllStepsStr) {
         int indexOfParticularLineSegment = -1;
 
         for (int i = searchStartBarrior_fromMinus1; i < allMatchesInDifferentDirectionsDifferentLongs.size(); i++){

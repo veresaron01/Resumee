@@ -23,7 +23,33 @@ public class AIPlayer {
         //gameUtility.exAllStepsStr
     }
 
-    public List<String> findTheEndPointsOfDiagonalContinuousMatches(List<List<String>> diagonsPossible, List<String> exOrOoAllStepsStr) { //egzsyerusites egz for ciklusra
+    public List<String> getAfterEndPointsList(List<List<String>> diagonsPossible, List<String> exOrOoAllStepsStr){
+        List<String> endPoints = findTheEndPointsOfDiagonalContinuousMatches(diagonsPossible, exOrOoAllStepsStr);
+        List<String> afterEndPoints = new ArrayList<>();
+        for (String endPoint : endPoints){
+            String afterEndPoint = getAfterEndsPoints(endPoint);
+            afterEndPoints.add(afterEndPoint);
+        }
+        return afterEndPoints;
+    }
+
+    public boolean isPointEmpty(String point){
+        boolean isEmpty = gameUtility.allStepsInString.contains(point);
+
+        return !isEmpty;
+    }
+
+    public boolean isPointOnTable(String point, int tableDimensionY, int tableDimensionX){
+        String[] y_x = point.split(" ");
+        int y = Integer.parseInt(y_x[0]);
+        int x = Integer.parseInt(y_x[1]);
+        if (y < 0 || y > tableDimensionY || x < 0 || x > tableDimensionX){
+            return false;
+        }
+        return true;
+    }
+
+    public List<String> findTheEndPointsOfDiagonalContinuousMatches(List<List<String>> diagonsPossible, List<String> exOrOoAllStepsStr) {
         List<String> foundDiaMatchesInString = new ArrayList<>();
         for (int i = 0; i < diagonsPossible.size(); i++){
             if (exOrOoAllStepsStr.containsAll(diagonsPossible.get(i))){
@@ -101,11 +127,19 @@ public class AIPlayer {
 
         List<String> steps = List.of("1 1", "2 2", "3 3",  "4 4", "5 5");
 
-        System.out.println(ai.findTheEndPointsOfDiagonalContinuousMatches(possible, steps));
+//        System.out.println(ai.findTheEndPointsOfDiagonalContinuousMatches(possible, steps));
+//
+//        System.out.println();
+//
+//        System.out.println(gameUtility2.findIndexesOfMatchesWithDifferentLength(possible, 0, steps));
+//
+//        System.out.println();
+//
+//        System.out.println(ai.checkAfterEndPointsEmptiness(possible, steps));
+//
+//        System.out.println();
 
-        System.out.println();
-
-        System.out.println(gameUtility2.findIndexesOfMatchesWithDifferentLength(possible, 0, steps));
+        System.out.println(ai.isPointOnTable("1 5",5,5));
 
     }
 

@@ -64,8 +64,10 @@ public class GameInitializer {
 
         while (!isGameEnded) {
 
-            System.out.println(AIPlayer.findTheEndPointsOfDiagonalContinuousMatches(AIPlayer.allPartMatchesInTheDiagons2, gameUtility.allStepsInString)); /////////////////////
-            System.out.println(AIPlayer.allPartMatchesInTheDiagons2);
+//            System.out.println(AIPlayer.findTheEndPointsOfDiagonalContinuousMatches(AIPlayer.allPartMatchesInTheDiagons2, gameUtility.allStepsInString)); /////////////////////
+//            System.out.println(AIPlayer.allPartMatchesInTheDiagons2);
+            System.out.println(AIPlayer.isPointEmpty("2 2"));
+            System.out.println(gameUtility.allStepsInString);
 
             //first player
             takePlayerStep(1);
