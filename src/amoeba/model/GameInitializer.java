@@ -36,17 +36,50 @@ public class GameInitializer {
         int y;
         int x;
 
-        if (numberOfPlayers == 1){
-            while (gameUtility.checkValidity((y = userInput.getStepInput(yDim) -1), (x = userInput.getStepInput(xDim) -1))) {
+//        if (numberOfPlayers == 1) { //átírni, a gép teszi a másik pontot (getAIStepY(), getAIStepX() )
+//            AIPlayer.aiMainAlgorithm(whoStarts);
+//            while (gameUtility.checkValidity((y = AIPlayer.aiStepY - 1), (x = AIPlayer.aiStepX - 1))) {
+//                ConsoleTexts.printWrongCoordinates();
+//                AIPlayer.aiMainAlgorithm(whoStarts);
+//            }
+//        } else {
+            while (gameUtility.checkValidity((y = userInput.getStepInput(yDim) - 1), (x = userInput.getStepInput(xDim) - 1))) {     // mi szükség van az       ŰŰyŰŰ = userInput.getStepInput(yDim) -1)
                 ConsoleTexts.printWrongCoordinates();
             }
-        } else { //átírni, a gép teszi a másik pontot (getAIStepY(), getAIStepX() )
-            while (gameUtility.checkValidity((y = userInput.getStepInput(yDim) -1), (x = userInput.getStepInput(xDim) -1))) {
-                ConsoleTexts.printWrongCoordinates();
-            }
+//        }
+
+        if (XO == 1) {
+            gameUtility.addExStep(y, x);
+        } else {
+            gameUtility.addOoStep(y, x);
         }
 
-        if(XO == 1) {
+        char[][] wholeTable = gameUtility.getCurrentWholeTable();
+
+        gameTable.printTable(wholeTable);
+
+    }
+
+    private void takeAIPlayerStep(int XO) throws IOException {
+
+        ConsoleTexts.printWhichPlayerChooses(XO);
+
+        int y;
+        int x;
+
+        //AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.exStepsInString, gameUtility.ooStepsInString);
+
+        while (gameUtility.checkValidity((y = AIPlayer.aiStepY ), (x = AIPlayer.aiStepX ))) { // -1 -1
+            ConsoleTexts.printWrongCoordinates();
+            AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.ooStepsInString, gameUtility.exStepsInString);
+        }
+
+//        while (gameUtility.checkValidity((y = userInput.getStepInput(yDim) - 1), (x = userInput.getStepInput(xDim) - 1))) {     // mi szükség van az       ŰŰyŰŰ = userInput.getStepInput(yDim) -1)
+//            ConsoleTexts.printWrongCoordinates();
+//
+//        }
+
+        if (XO == 1) {
             gameUtility.addExStep(y, x);
         } else {
             gameUtility.addOoStep(y, x);
@@ -66,11 +99,16 @@ public class GameInitializer {
 
 //            System.out.println(AIPlayer.findTheEndPointsOfDiagonalContinuousMatches(AIPlayer.allPartMatchesInTheDiagons2, gameUtility.allStepsInString)); /////////////////////
 //            System.out.println(AIPlayer.allPartMatchesInTheDiagons2);
-            System.out.println(AIPlayer.isPointEmpty("2 2"));
-            System.out.println(gameUtility.allStepsInString);
+            //System.out.println(AIPlayer.isPointEmpty("2 2") + "2 2 is empty");
+            System.out.println(gameUtility.allStepsInString + "  all steps in string");
 
             //first player
-            takePlayerStep(1);
+            if (numberOfPlayers == 1) {
+                takeAIPlayerStep(1);
+            } else {
+                takePlayerStep(1);
+            }
+
 
             if (gameUtility.matcher(1)) {
                 ConsoleTexts.printWinner(1);

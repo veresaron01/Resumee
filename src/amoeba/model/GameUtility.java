@@ -98,6 +98,20 @@ public class GameUtility {
 
     public char[][] getCurrentWholeTable() {
 
+        ////////////////////////////////////
+        for (int i = 0; i < exCoordinatesY.size(); i++) {
+            if (exCoordinatesY.get(i) < 0 || exCoordinatesX.get(i) < 0){
+                System.out.println(exCoordinatesY.get(i) + " ** " + exCoordinatesX.get(i));
+            }
+        }
+        for (int i = 0; i < ooCoordinatesY.size(); i++) {
+            if (ooCoordinatesY.get(i) < 0 || ooCoordinatesX.get(i) < 0){
+                System.out.println(ooCoordinatesY.get(i) + " **** " + ooCoordinatesX.get(i));
+            }
+        }
+        ////////////////////////////////////
+
+
         for (int i = 0; i < exCoordinatesY.size(); i++) {
             currentWholeTable[exCoordinatesY.get(i)][exCoordinatesX.get(i)] = 'X';
         }
