@@ -67,7 +67,9 @@ public class GameInitializer {
         int y;
         int x;
 
-        //AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.exStepsInString, gameUtility.ooStepsInString);
+        if (gameUtility.allStepsInString.isEmpty()){
+            AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.exStepsInString, gameUtility.ooStepsInString);
+        }
 
         while (gameUtility.checkValidity((y = AIPlayer.aiStepY ), (x = AIPlayer.aiStepX ))) { // -1 -1
             ConsoleTexts.printWrongCoordinates();
