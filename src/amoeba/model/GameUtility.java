@@ -41,8 +41,8 @@ public class GameUtility {
             }
         }
     }
-
-    public void getDiagonalMatches(int length, List<List<String>> diagonalPartMatches) {
+//nem jo eppen
+    public void getDiagonalMatches(int length, List<List<String>> diagonalPartMatches) { //TODO
 
         //atlosan lehetseges talalatok bal fentrol, jobb le.
         for (int i = 0; i < tableDimensionY +1 - length; i++) {
