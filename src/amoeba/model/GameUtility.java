@@ -71,8 +71,8 @@ public class GameUtility {
     }
 
     public void getHorizontalMatches(int length, List<List<String>> partMatches){
-        for (int i = 1; i < tableDimensionY + 1; i++){
-            for (int j = 0; j < tableDimensionX - length + 1; j++){
+        for (int i = 1; i < tableDimensionY + 2; i++){
+            for (int j = 1; j < tableDimensionX - length + 2; j++){
 
                 List<String> oneMatchOnAHorizontalLine = new ArrayList<>();
                 for (int k = 1; k < length + 1; k++){
@@ -84,8 +84,8 @@ public class GameUtility {
     }
 
     public void getVerticalMatches(int length, List<List<String>> partMatches){
-        for (int i = 1; i < tableDimensionX + 1; i++){
-            for (int j = 0; j < tableDimensionY - length + 1; j++){
+        for (int i = 1; i < tableDimensionX + 2; i++){
+            for (int j = 1; j < tableDimensionY - length + 2; j++){
 
                 List<String> oneMatchOnAVerticalLine = new ArrayList<>();
                 for (int k = 1; k < length + 1; k++){
@@ -101,23 +101,23 @@ public class GameUtility {
         ////////////////////////////////////
         for (int i = 0; i < exCoordinatesY.size(); i++) {
             if (exCoordinatesY.get(i) < 0 || exCoordinatesX.get(i) < 0){
-                System.out.println(exCoordinatesY.get(i) + " ** " + exCoordinatesX.get(i));
+                System.out.println(exCoordinatesY.get(i) + " **XX " + exCoordinatesX.get(i));
             }
         }
         for (int i = 0; i < ooCoordinatesY.size(); i++) {
             if (ooCoordinatesY.get(i) < 0 || ooCoordinatesX.get(i) < 0){
-                System.out.println(ooCoordinatesY.get(i) + " **** " + ooCoordinatesX.get(i));
+                System.out.println(ooCoordinatesY.get(i) + " **OO " + ooCoordinatesX.get(i));
             }
         }
         ////////////////////////////////////
 
 
         for (int i = 0; i < exCoordinatesY.size(); i++) {
-            currentWholeTable[exCoordinatesY.get(i)][exCoordinatesX.get(i)] = 'X';
+            currentWholeTable[(exCoordinatesY.get(i) -0)][(exCoordinatesX.get(i) -0)] = 'X';
         }
 
         for (int i = 0; i < ooCoordinatesY.size(); i++) {
-            currentWholeTable[ooCoordinatesY.get(i)][ooCoordinatesX.get(i)] = 'O';
+            currentWholeTable[(ooCoordinatesY.get(i) -0)][(ooCoordinatesX.get(i) -0)] = 'O';
         }
 
         return currentWholeTable;
@@ -134,15 +134,15 @@ public class GameUtility {
     }
 
     public void addExStep(int y, int x) {
-        exCoordinatesY.add(y);
-        exCoordinatesX.add(x);
+        exCoordinatesY.add(y-1);/////////////////
+        exCoordinatesX.add(x-1);/////////////////
         stepCounter++;
         exStepsInString.add((y + 1) + " " + (x + 1));
     }
 
     public void addOoStep(int y, int x) {
-        ooCoordinatesY.add(y);
-        ooCoordinatesX.add(x);
+        ooCoordinatesY.add(y-1);///////////////////
+        ooCoordinatesX.add(x-1);///////////////////
         stepCounter++;
         ooStepsInString.add((y + 1) + " " + (x + 1));
     }

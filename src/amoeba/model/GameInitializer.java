@@ -43,7 +43,7 @@ public class GameInitializer {
 //                AIPlayer.aiMainAlgorithm(whoStarts);
 //            }
 //        } else {
-            while (gameUtility.checkValidity((y = userInput.getStepInput(yDim) - 1), (x = userInput.getStepInput(xDim) - 1))) {     // mi szükség van az       ŰŰyŰŰ = userInput.getStepInput(yDim) -1)
+            while (gameUtility.checkValidity((y = userInput.getStepInput(yDim) - 0), (x = userInput.getStepInput(xDim) - 0))) {     // mi szükség van az       ŰŰyŰŰ = userInput.getStepInput(yDim) -1)
                 ConsoleTexts.printWrongCoordinates();
             }
 //        }

@@ -43,41 +43,22 @@ public class AIPlayer {
 
         List<String> afterEndDDDoublePoints = new ArrayList<>();
         afterEndDDDoublePoints.addAll(getAfterEndPointsList(allPartMatchesInTheDiagons3, exOrOoAllStepsStr));
-        //System.out.println(getAfterEndPointsList(allPartMatchesInTheDiagons3, exOrOoAllStepsStr) + "  endpointlist");////////////////////////////***********
         afterEndDDDoublePoints.addAll(getAfterEndPointsList(allPartMatchesInTheHorizontals3, exOrOoAllStepsStr));
         afterEndDDDoublePoints.addAll(getAfterEndPointsList(allPartMatchesInTheVerticals3, exOrOoAllStepsStr));
+
 
         System.out.println(allPartMatchesInTheHorizontals3 + "allPartMatchesInTheHorizontals3");
         System.out.println(afterEndDDDoublePoints + "allAfterEndPointsDoublePoints");
         System.out.println(afterEndDDDoublePoints.size() + "  afterenpointsList size");////////////////**********
 
 
-
-
         List<String> afterEndSSSinglePoints = make1PointsListFrom2PointList(afterEndDDDoublePoints);
-        List<String> afterEndSSSinglePointsCorrect = new ArrayList<>();
-        for (int i = 0; i < afterEndSSSinglePoints.size(); i++) {
-            if (!isPointFull(afterEndSSSinglePoints.get(i)) && isPointOnTable(afterEndSSSinglePoints.get(i), gameUtility.tableDimensionY, gameUtility.tableDimensionX)){
-                afterEndSSSinglePointsCorrect.add(afterEndSSSinglePoints.get(i));
-            }
-        }
-        //megkeresi a legközelebb eső találatot a pontjaim gravitációs központjához
-        int[] centerOfGravity = centerOfAIPointsGravity(gameUtility.ooCoordinatesY, gameUtility.ooCoordinatesX);
-        int indexOfClosestPointToTheCenterOfGravity = 0;
-        double minDistance = 20;
-        for (int i = 0; i < afterEndSSSinglePointsCorrect.size(); i++) {
-            int[] point = pointParser(afterEndSSSinglePointsCorrect.get(i));
-            double distanceY = Math.abs(point[0] - centerOfGravity[0]);
-            double distanceX = Math.abs(point[1] - centerOfGravity[1]);
-            double distance = Math.sqrt((distanceY * distanceY) + (distanceX * distanceX));
+        List<String> afterEndSSSinglePointsCorrect = filterOutInvalidPoints(afterEndSSSinglePoints);
 
-            if (distance < minDistance){
-                minDistance = distance;
-                indexOfClosestPointToTheCenterOfGravity = i;
-            }
-        }
+        int indexOfClosestPointToTheCenterOfGravity = findClosestCoordinateToTheCenterOfGravity(gameUtility.tableDimensionY, gameUtility.tableDimensionX, afterEndSSSinglePointsCorrect);
 
-        if (minDistance < 20){
+
+        if (indexOfClosestPointToTheCenterOfGravity > -1){
             int[] aiStep = pointParser(afterEndSSSinglePointsCorrect.get(indexOfClosestPointToTheCenterOfGravity));
 
             String point = aiStep[0] + " " + aiStep[1];
@@ -99,15 +80,16 @@ public class AIPlayer {
                 aiStepX = i[1] -1;
             } else { //////dummy steps
                 Random random = new Random();
-                aiStepY = random.nextInt(5) + 0;
-                aiStepX = random.nextInt(5) + 0;
+                aiStepY = random.nextInt(5) + 1;
+                aiStepX = random.nextInt(5) + 1;
             }
         }
 
     }
 
-    public int findClosestCoordinateToTheCenterOfGravity(int centerY, int centerX, List<String> points){ //PIPA
-        int indexOfClosestPointToTheCenterOfGravity = 0;
+    //PIPA
+    public int findClosestCoordinateToTheCenterOfGravity(int centerY, int centerX, List<String> points){
+        int indexOfClosestPointToTheCenterOfGravity = -1;
         double minDistance = 20;
         for (int i = 0; i < points.size(); i++) {
             int[] point = pointParser(points.get(i));
@@ -124,15 +106,19 @@ public class AIPlayer {
         return indexOfClosestPointToTheCenterOfGravity;
     }
 
-    public int[] findClosestCoordinateSSSToTheCenterOfGravity(){
+    public int[] findClosestCoordinateSSSToTheCenterOfGravity(int centerY, int centerX, List<String> points){
         int[] result = {};
         //TODO
+        //List<String>
+
+
+
         return result;
     }
 
 
-
-    public List<String> make1PointsListFrom2PointList(List<String> twoPointsList){ //PIPA
+    //PIPA
+    public List<String> make1PointsListFrom2PointList(List<String> twoPointsList){
         List<String> onePointsList = new ArrayList<>();
 
         for (String twoPoints : twoPointsList){
@@ -153,6 +139,17 @@ public class AIPlayer {
         return onePointsList;
     }
 
+    //PIPA
+    public List<String> filterOutInvalidPoints(List<String> pointsToValidate) {
+        List<String> correctPoints = new ArrayList<>();
+        for (int i = 0; i < pointsToValidate.size(); i++) {
+            if (!isPointFull(pointsToValidate.get(i)) && isPointOnTable(pointsToValidate.get(i), gameUtility.tableDimensionY, gameUtility.tableDimensionX)){
+                correctPoints.add(pointsToValidate.get(i));
+            }
+        }
+        return correctPoints;
+    }
+
     public int[] centerOfTable(){
         int[] center = new int[2];
         center[0] = (int) Math.ceil((double) gameUtility.tableDimensionY / 2);
@@ -160,6 +157,7 @@ public class AIPlayer {
         return center;
     }
 
+    //PIPA
     public int[] pointParser(String point){
         String[] pointCoords = point.split(" ");
 
@@ -170,7 +168,8 @@ public class AIPlayer {
         return  pointCoordinates;
     }
 
-    public int[] centerOfAIPointsGravity(List<Integer> ys, List<Integer> xs){ //PIPA
+    //PIPA
+    public int[] centerOfAIPointsGravity(List<Integer> ys, List<Integer> xs){
         int[] center = new int[2];
         List<Integer> aIStepsY;
         List<Integer> aIStepsX;
@@ -226,6 +225,7 @@ public class AIPlayer {
         return isEmpty;
     }
 
+    //PIPA**************
     public boolean isPointOnTable(String point, int tableDimensionY, int tableDimensionX){
         String[] y_x = point.split(" ");
         int y = Integer.parseInt(y_x[0]);
@@ -236,7 +236,8 @@ public class AIPlayer {
         return true;
     }
 
-    private static String getAfterEndsPoints(String twoPoints){ //PIPA
+    //PIPA
+    private static String getAfterEndsPoints(String twoPoints){
         String[] splittedStr = twoPoints.split(" ");
         int[] point = {
                 Integer.parseInt(splittedStr[0]),
