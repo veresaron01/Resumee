@@ -23,8 +23,8 @@ public class AIPlayer {
     public AIPlayer(GameUtility gameUtility, int whoStarts) {
         this.gameUtility = gameUtility;
         this.whoStarts = whoStarts;
-        gameUtility.getDiagonalMatches(3, allPartMatchesInTheDiagons3);
-        gameUtility.getDiagonalMatches(2, allPartMatchesInTheDiagons2);
+//        gameUtility.getDiagonalMatches(3, allPartMatchesInTheDiagons3);
+//        gameUtility.getDiagonalMatches(2, allPartMatchesInTheDiagons2);
         gameUtility.getHorizontalMatches(3, allPartMatchesInTheHorizontals3);
         gameUtility.getHorizontalMatches(2, allPartMatchesInTheHorizontals2);
         gameUtility.getVerticalMatches(3, allPartMatchesInTheVerticals3);

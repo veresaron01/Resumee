@@ -45,8 +45,8 @@ public class GameUtility {
     public void getDiagonalMatches(int length, List<List<String>> diagonalPartMatches) {
 
         //atlosan lehetseges talalatok bal fentrol, jobb le.
-        for (int i = 0; i < tableDimensionY - 3 + 4 - length; i++) {
-            for (int j = 0; j < tableDimensionX - 3 + 4 - length; j++) {
+        for (int i = 0; i < tableDimensionY +1 - length; i++) {
+            for (int j = 0; j < tableDimensionX +1 - length; j++) {
 
                 List<String> oneMatchOnADiagon = new ArrayList<>();
                 for (int k = 1; k < length + 1; k++){
@@ -57,7 +57,7 @@ public class GameUtility {
         }
 
         //atlosan lehetseges talalatok, bal lentrol, jobb fel
-        for (int i = 0; i < tableDimensionY - 3 + 4 - length; i++) {
+        for (int i = 0; i < tableDimensionY +1 - length; i++) {
             for (int j = tableDimensionX + 1; j > length; j--) {
 
                 List<String> oneMatchOnADiagon = new ArrayList<>();
