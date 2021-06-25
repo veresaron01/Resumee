@@ -49,13 +49,13 @@ public class AIPlayer {
 
         System.out.println(allPartMatchesInTheHorizontals3 + "allPartMatchesInTheHorizontals3");
         System.out.println(afterEndDDDoublePoints + "allAfterEndPointsDoublePoints");
-        System.out.println(afterEndDDDoublePoints.size() + "  afterenpointsList size");////////////////**********
+        System.out.println(afterEndDDDoublePoints.size() + "  afterenpointsList size");
 
 
         List<String> afterEndSSSinglePoints = make1PointsListFrom2PointList(afterEndDDDoublePoints);
         List<String> afterEndSSSinglePointsCorrect = filterOutInvalidPoints(afterEndSSSinglePoints);
 
-        int indexOfClosestPointToTheCenterOfGravity = findClosestCoordinateToTheCenterOfGravity(gameUtility.tableDimensionY, gameUtility.tableDimensionX, afterEndSSSinglePointsCorrect);
+        int indexOfClosestPointToTheCenterOfGravity = findClosestCoordinateToACenterPoint(centerOfTable()[0], centerOfTable()[1], afterEndSSSinglePointsCorrect);//**************
 
 
         if (indexOfClosestPointToTheCenterOfGravity > -1){
@@ -88,7 +88,7 @@ public class AIPlayer {
     }
 
     //PIPA
-    public int findClosestCoordinateToTheCenterOfGravity(int centerY, int centerX, List<String> points){
+    public int findClosestCoordinateToACenterPoint(int centerY, int centerX, List<String> points){
         int indexOfClosestPointToTheCenterOfGravity = -1;
         double minDistance = 20;
         for (int i = 0; i < points.size(); i++) {
@@ -107,7 +107,7 @@ public class AIPlayer {
     }
 
     //PIPA
-    public List<Integer> findClosestCoordinateSSSToTheCenterOfGravity(int centerY, int centerX, List<String> points){
+    public List<Integer> findClosestCoordinateSSSToACenterPoint(int centerY, int centerX, List<String> points){
         List<Integer> indicesInRelevantOrder = new ArrayList<>();
 
         for (int j = 0; j < points.size(); j++) {
@@ -168,10 +168,11 @@ public class AIPlayer {
         return correctPoints;
     }
 
+    //PIPA
     public int[] centerOfTable(){
         int[] center = new int[2];
         center[0] = (int) Math.ceil((double) gameUtility.tableDimensionY / 2);
-        center[1] = (int) Math.ceil((double) gameUtility.tableDimensionY / 2);
+        center[1] = (int) Math.ceil((double) gameUtility.tableDimensionX / 2);
         return center;
     }
 
@@ -353,8 +354,10 @@ public class AIPlayer {
 //        int[] i = ai.centerOfAIPointsGravity(integersY,integersX);
 //        System.out.println(i[0] + " " + i[1]);
 
-        List<String> oo = List.of( "3 4", "3 3", "3 3", "3 4", "5 1", "5 5");
-        System.out.println(ai.findClosestCoordinateSSSToTheCenterOfGravity(3, 3, oo));
+//        List<String> oo = List.of( "3 4", "3 3", "3 3", "3 4", "5 1", "5 5");
+//        System.out.println(ai.findClosestCoordinateSSSToTheCenterOfGravity(3, 3, oo));
+
+
 
 
 

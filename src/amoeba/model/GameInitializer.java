@@ -105,7 +105,7 @@ public class GameInitializer {
             System.out.println(gameUtility.allStepsInString + "  all steps in string");
 
             //first player
-            if (numberOfPlayers == 1) {
+            if (numberOfPlayers == 1 && whoStarts == 2) {
                 takeAIPlayerStep(1);
             } else {
                 takePlayerStep(1);
@@ -124,7 +124,13 @@ public class GameInitializer {
             }
 
             //second player
-            takePlayerStep(2);
+            //takePlayerStep(2);
+
+            if (numberOfPlayers == 1 && whoStarts == 1) {
+                takeAIPlayerStep(2);
+            } else {
+                takePlayerStep(2);
+            }
 
             if (gameUtility.matcher(2)) {
                 ConsoleTexts.printWinner(2);
