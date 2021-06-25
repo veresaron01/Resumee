@@ -23,8 +23,8 @@ public class AIPlayer {
     public AIPlayer(GameUtility gameUtility, int whoStarts) {
         this.gameUtility = gameUtility;
         this.whoStarts = whoStarts;
-//        gameUtility.getDiagonalMatches(3, allPartMatchesInTheDiagons3);
-//        gameUtility.getDiagonalMatches(2, allPartMatchesInTheDiagons2);
+        gameUtility.getDiagonalMatches(3, allPartMatchesInTheDiagons3);
+        gameUtility.getDiagonalMatches(2, allPartMatchesInTheDiagons2);
         gameUtility.getHorizontalMatches(3, allPartMatchesInTheHorizontals3);
         gameUtility.getHorizontalMatches(2, allPartMatchesInTheHorizontals2);
         gameUtility.getVerticalMatches(3, allPartMatchesInTheVerticals3);
@@ -106,14 +106,32 @@ public class AIPlayer {
         return indexOfClosestPointToTheCenterOfGravity;
     }
 
-    public int[] findClosestCoordinateSSSToTheCenterOfGravity(int centerY, int centerX, List<String> points){
-        int[] result = {};
-        //TODO
-        //List<String>
+    //PIPA
+    public List<Integer> findClosestCoordinateSSSToTheCenterOfGravity(int centerY, int centerX, List<String> points){
+        List<Integer> indicesInRelevantOrder = new ArrayList<>();
 
+        for (int j = 0; j < points.size(); j++) {
 
+            int indexOfClosestPointToTheCenterOfGravity = -1;
+            double minDistance = 20;
+            for (int i = 0; i < points.size(); i++) {
+                if (!indicesInRelevantOrder.contains(i)){
+                    int[] point = pointParser(points.get(i));
+                    double distanceY = Math.abs(point[0] - centerY);
+                    double distanceX = Math.abs(point[1] - centerX);
+                    double distance = Math.sqrt((distanceY * distanceY) + (distanceX * distanceX));
 
-        return result;
+                    if (distance < minDistance){
+                        minDistance = distance;
+                        indexOfClosestPointToTheCenterOfGravity = i;
+                    }
+                }
+            }
+            if (indexOfClosestPointToTheCenterOfGravity >= 0) {
+                indicesInRelevantOrder.add(indexOfClosestPointToTheCenterOfGravity);
+            }
+        }
+        return indicesInRelevantOrder;
     }
 
 
@@ -334,6 +352,9 @@ public class AIPlayer {
 //        List<Integer> integersX = List.of(1,2,4,10);
 //        int[] i = ai.centerOfAIPointsGravity(integersY,integersX);
 //        System.out.println(i[0] + " " + i[1]);
+
+        List<String> oo = List.of( "3 4", "3 3", "3 3", "3 4", "5 1", "5 5");
+        System.out.println(ai.findClosestCoordinateSSSToTheCenterOfGravity(3, 3, oo));
 
 
 
