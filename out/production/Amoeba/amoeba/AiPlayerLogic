@@ -1,0 +1,68 @@
+1.
+megtalálni a 3 hosszúságú saját találatokat minden irányban
+megnézni van-e szabad vége,
+oda kell tenni
+
+2.
+megtalálni a 3 részes híjas saját találatokat
+megnézni üres-e
+oda kell tenni
+
+3.
+    megtalálni a 3 hosszúságú ellenséges találatokat minden irányban
+    megnézni van-e szabad vége, oda kell tenni
+
+4.
+    megtalálni a 3 részes híjas ellenséges találatokat
+    megnézni üres-e
+    oda kell tenni
+
+5.
+megtalálni a 2 hosszúságú saját találatokat minden irányban
+megnézni van-e szabad vége, és azután van e hely terjeszkedni
+megnézni melyik szabad vége segít nekem, másodsorban melyik akadályozza az ellenséget
+oda kell tenni
+
+6.
+megtalálni a 2 részes híjas saját találatokat minden irányban
+megnézni, hogy 1 hely van-e közte,
+ha 1 hely akkor megnézni lehet-e a két végén terjeszkedni (ha lehet terjeszkedni akkor
+oda kell tenni)
+2 hely esetén: megnézni melyik köztes hely segít nekem, másodsorban melyik akadályozza az ellenséget
+oda kell tenni
+
+7.
+    megtalálni a 2 hosszúságú ellenséges találatokat minden irányban
+    megnézni van-e szabad vége,
+    megnézni melyik szabad vége segít engem, ha csak egy van akkor eggyel távolabbi is jó lehet ha segít engem
+    oda kell tenni
+
+8.
+    megtalálni a 2 részes híjas ellenséges találatokat minden irányban
+    megnézni, hogy 1 hely van-e közte,
+    ha 1 hely akkor megnézni lehet-e a két végén terjeszkedni (ha lehet terjeszkedni akkor
+    oda kell tenni)
+    2 hely esetén: megnézni melyik köztes hely segít nekem, másodsorban melyik akadályozza az ellenséget
+    oda kell tenni
+
+9.
+megtalálni 1 hosszúságú saját találatokat
+megnézni van-e üres szomszédja,
+megnézni a 8 irányt, vagy a 4 irányt(ha az adott pontot középsőként képzelem el),hogy van-e kigyűlési lehetőség
+és
+van-e ellenséges szomszédja, ha igen akkor
+megnézni a lehetséges helyek közül melyik (*) segít nekem jobban, ha egyforma
+(megnézni a melyik akadályozza a közülük jobban a másikat)
+oda kell tenni
+
+10.
+    megtalálni 1 hosszúságú ellenséges találatokat
+    mellé tenni*
+
+11.
+a tábla közepéhez közel tenni(ha nem üres akkor *) (kezdő lépést randomizálni, a keret kivételével bárhova)
+
+
+
+
+*(mindig a saját pontjaim közelébe tegye ha ekvivalens választási lehetőség adódik)
