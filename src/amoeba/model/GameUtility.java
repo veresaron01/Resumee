@@ -45,11 +45,11 @@ public class GameUtility {
     public void getDiagonalMatches(int length, List<List<String>> diagonalPartMatches) { //TODO
 
         //atlosan lehetseges talalatok bal fentrol, jobb le.
-        for (int i = 0; i < tableDimensionY +1 - length; i++) {
-            for (int j = 0; j < tableDimensionX +1 - length; j++) {
+        for (int i = 1; i < tableDimensionY +2 - length; i++) {
+            for (int j = 1; j < tableDimensionX +2 - length; j++) {
 
                 List<String> oneMatchOnADiagon = new ArrayList<>();
-                for (int k = 1; k < length + 1; k++){
+                for (int k = 0; k < length + 0; k++){
                     oneMatchOnADiagon.add(String.format("%s %s", (i + k), (j + k)));
                 }
                 diagonalPartMatches.add(oneMatchOnADiagon);
@@ -57,16 +57,17 @@ public class GameUtility {
         }
 
         //atlosan lehetseges talalatok, bal lentrol, jobb fel
-        for (int i = 0; i < tableDimensionY +1 - length; i++) {
+        for (int i = 1; i < tableDimensionY +2 - length; i++) {
             for (int j = tableDimensionX + 1; j > length; j--) {
 
                 List<String> oneMatchOnADiagon = new ArrayList<>();
                 for (int k = 1; k < length + 1; k++){
-                    oneMatchOnADiagon.add(String.format("%s %s", (i + k), (j - k)));
+                    oneMatchOnADiagon.add(String.format("%s %s", (i + k - 1), (j - k)));
                 }
                 diagonalPartMatches.add(oneMatchOnADiagon);
             }
         }
+        System.out.println(diagonalPartMatches);
 
     }
 
@@ -137,14 +138,16 @@ public class GameUtility {
         exCoordinatesY.add(y-1);/////////////////
         exCoordinatesX.add(x-1);/////////////////
         stepCounter++;
-        exStepsInString.add((y + 1) + " " + (x + 1));
+        exStepsInString.add((y + 0) + " " + (x + 0));
+        System.out.println((y + 0) + " " + (x + 0) + " X");
     }
 
     public void addOoStep(int y, int x) {
         ooCoordinatesY.add(y-1);///////////////////
         ooCoordinatesX.add(x-1);///////////////////
         stepCounter++;
-        ooStepsInString.add((y + 1) + " " + (x + 1));
+        ooStepsInString.add((y + 0) + " " + (x + 0));
+        System.out.println((y + 0) + " " + (x + 0) + " Y");
     }
 
     public boolean checkDrawGame() {
