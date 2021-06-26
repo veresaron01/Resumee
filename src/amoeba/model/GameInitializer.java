@@ -36,17 +36,9 @@ public class GameInitializer {
         int y;
         int x;
 
-//        if (numberOfPlayers == 1) { //átírni, a gép teszi a másik pontot (getAIStepY(), getAIStepX() )
-//            AIPlayer.aiMainAlgorithm(whoStarts);
-//            while (gameUtility.checkValidity((y = AIPlayer.aiStepY - 1), (x = AIPlayer.aiStepX - 1))) {
-//                ConsoleTexts.printWrongCoordinates();
-//                AIPlayer.aiMainAlgorithm(whoStarts);
-//            }
-//        } else {
-            while (gameUtility.checkValidity((y = userInput.getStepInput(yDim) - 0), (x = userInput.getStepInput(xDim) - 0))) {     // mi szükség van az       ŰŰyŰŰ = userInput.getStepInput(yDim) -1)
-                ConsoleTexts.printWrongCoordinates();
-            }
-//        }
+        while (gameUtility.checkValidity((y = userInput.getStepInput(yDim) - 0), (x = userInput.getStepInput(xDim) - 0))) {     // mi szükség van az       ŰŰyŰŰ = userInput.getStepInput(yDim) -1)
+            ConsoleTexts.printWrongCoordinates();
+        }
 
         if (XO == 1) {
             gameUtility.addExStep(y, x);
@@ -71,20 +63,19 @@ public class GameInitializer {
             AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.exStepsInString, gameUtility.ooStepsInString);
         }
 
+        System.out.println(AIPlayer.aiStepY + " " + AIPlayer.aiStepX + " asdasdasd");
+
         while (gameUtility.checkValidity((y = AIPlayer.aiStepY ), (x = AIPlayer.aiStepX ))) { // -1 -1
             ConsoleTexts.printWrongCoordinates();
             AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.ooStepsInString, gameUtility.exStepsInString);
         }
 
-//        while (gameUtility.checkValidity((y = userInput.getStepInput(yDim) - 1), (x = userInput.getStepInput(xDim) - 1))) {     // mi szükség van az       ŰŰyŰŰ = userInput.getStepInput(yDim) -1)
-//            ConsoleTexts.printWrongCoordinates();
-//
-//        }
+        System.out.println(AIPlayer.aiStepY + " " + AIPlayer.aiStepX + " asdasdasdasd");
 
         if (XO == 1) {
-            gameUtility.addExStep(y, x);
+            gameUtility.addExStep(y+1, x+1);////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } else {
-            gameUtility.addOoStep(y, x);
+            gameUtility.addOoStep(y+1, x+1);
         }
 
         char[][] wholeTable = gameUtility.getCurrentWholeTable();
@@ -102,7 +93,7 @@ public class GameInitializer {
 //            System.out.println(AIPlayer.findTheEndPointsOfDiagonalContinuousMatches(AIPlayer.allPartMatchesInTheDiagons2, gameUtility.allStepsInString)); /////////////////////
 //            System.out.println(AIPlayer.allPartMatchesInTheDiagons2);
             //System.out.println(AIPlayer.isPointEmpty("2 2") + "2 2 is empty");
-            System.out.println(gameUtility.allStepsInString + "  all steps in string");
+            //System.out.println(gameUtility.allStepsInString + "  all steps in string");
 
             //first player
             if (numberOfPlayers == 1 && whoStarts == 2) {

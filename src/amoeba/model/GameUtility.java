@@ -67,8 +67,6 @@ public class GameUtility {
                 diagonalPartMatches.add(oneMatchOnADiagon);
             }
         }
-        System.out.println(diagonalPartMatches);
-
     }
 
     public void getHorizontalMatches(int length, List<List<String>> partMatches){
@@ -135,11 +133,10 @@ public class GameUtility {
     }
 
     public void addExStep(int y, int x) {
-        exCoordinatesY.add(y-1);/////////////////
+        exCoordinatesY.add(y-1);/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         exCoordinatesX.add(x-1);/////////////////
         stepCounter++;
         exStepsInString.add((y + 0) + " " + (x + 0));
-        System.out.println((y + 0) + " " + (x + 0) + " X");
     }
 
     public void addOoStep(int y, int x) {
@@ -147,7 +144,6 @@ public class GameUtility {
         ooCoordinatesX.add(x-1);///////////////////
         stepCounter++;
         ooStepsInString.add((y + 0) + " " + (x + 0));
-        System.out.println((y + 0) + " " + (x + 0) + " Y");
     }
 
     public boolean checkDrawGame() {

@@ -23,12 +23,12 @@ public class AIPlayer {
     public AIPlayer(GameUtility gameUtility, int whoStarts) {
         this.gameUtility = gameUtility;
         this.whoStarts = whoStarts;
-//        gameUtility.getDiagonalMatches(3, allPartMatchesInTheDiagons3);
-//        gameUtility.getDiagonalMatches(2, allPartMatchesInTheDiagons2);
-//        gameUtility.getHorizontalMatches(3, allPartMatchesInTheHorizontals3);
-//        gameUtility.getHorizontalMatches(2, allPartMatchesInTheHorizontals2);
-//        gameUtility.getVerticalMatches(3, allPartMatchesInTheVerticals3);
-//        gameUtility.getVerticalMatches(2, allPartMatchesInTheVerticals2);
+        gameUtility.getDiagonalMatches(3, allPartMatchesInTheDiagons3);
+        gameUtility.getDiagonalMatches(2, allPartMatchesInTheDiagons2);
+        gameUtility.getHorizontalMatches(3, allPartMatchesInTheHorizontals3);
+        gameUtility.getHorizontalMatches(2, allPartMatchesInTheHorizontals2);
+        gameUtility.getVerticalMatches(3, allPartMatchesInTheVerticals3);
+        gameUtility.getVerticalMatches(2, allPartMatchesInTheVerticals2);
     }
 
     // XO12 arra vonatkozik ki kezd, 1-es: AI = O    ||    2-es: AI = X
@@ -55,46 +55,80 @@ public class AIPlayer {
         List<String> afterEndSSSinglePoints = make1PointsListFrom2PointsList(afterEndDDDoublePoints);
         List<String> afterEndSSSinglePointsCorrect = filterOutInvalidPoints(afterEndSSSinglePoints);
 
-        int indexOfClosestPointToTheCenterOfGravity = findClosestCoordinateToACenterPoint(centerOfTable()[0], centerOfTable()[1], afterEndSSSinglePointsCorrect);//**************
 
+        int indexOfClosestPointToTheCenterOfGravity = findClosestCoordinateToACenterPoint(pointParser(getCenterOfGravity(exOrOoAllStepsStr))[0], pointParser(getCenterOfGravity(exOrOoAllStepsStr))[1], afterEndSSSinglePointsCorrect);//**************
+
+        List<Integer> bestPointsToTake = findClosestCoordinateSSSToACenterPoint(pointParser(getCenterOfGravity(exOrOoAllStepsStr))[0], pointParser(getCenterOfGravity(exOrOoAllStepsStr))[1], afterEndSSSinglePointsCorrect);
 
 
 
         System.out.println(afterEndSSSinglePointsCorrect);
 
 
+        if (afterEndDDDoublePoints.isEmpty()){
+            Random random = new Random(); //dummy steps
+            aiStepY = random.nextInt(5) + 0;
+            aiStepX = random.nextInt(5) + 0;
+            System.out.println("C");
+        } else {
+            for (int i = 0; i < bestPointsToTake.size(); i++) {
+                String bestStep = afterEndSSSinglePointsCorrect.get(bestPointsToTake.get(i));
 
-//mess
-        if (indexOfClosestPointToTheCenterOfGravity > -1 && !afterEndSSSinglePointsCorrect.isEmpty()){
-            int[] aiStep = pointParser(afterEndSSSinglePointsCorrect.get(indexOfClosestPointToTheCenterOfGravity));
+                //if ()
 
-            String point = aiStep[0] + " " + aiStep[1];
-            System.out.println("D");
-//            if (!isPointFull(point) && !isPointOnTable(point, gameUtility.tableDimensionY, gameUtility.tableDimensionX)){
-            if (aiStep[0] >= 0 && aiStep[1] >= 0 && !isPointFull(point)){
-                aiStepY = aiStep[0] -1;
-                aiStepX = aiStep[1] -1;
-                System.out.println("A");
-            }else {
+                aiStepY = pointParser(bestStep)[0];
+                aiStepX = pointParser(bestStep)[1];
 
-            }
 
-        }else {
-            System.out.println(gameUtility.allStepsInString + "allStepsInString");//*******************
-            if (gameUtility.allStepsInString.size() < 1){
-                //AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.exStepsInString, gameUtility.ooStepsInString);
-                int[] i = centerOfTable();
-                System.out.println(i[0] + " " + i[1] + " az 'üres' pont");
-                aiStepY = i[0] -0;
-                aiStepX = i[1] -0;
-                System.out.println("B");
-            } else { //////dummy steps
-                Random random = new Random();
-                aiStepY = random.nextInt(5) + 1;
-                aiStepX = random.nextInt(5) + 1;
-                System.out.println("C");
             }
         }
+
+
+
+        System.out.println(aiStepY + " " + aiStepX + " asdasd");
+
+
+
+
+
+
+
+
+
+
+
+
+////mess
+//        if (indexOfClosestPointToTheCenterOfGravity > -1 && !afterEndSSSinglePointsCorrect.isEmpty()){
+//            int[] aiStep = pointParser(afterEndSSSinglePointsCorrect.get(indexOfClosestPointToTheCenterOfGravity));
+//
+//            String point = aiStep[0] + " " + aiStep[1];
+//            System.out.println("D");
+////            if (!isPointFull(point) && !isPointOnTable(point, gameUtility.tableDimensionY, gameUtility.tableDimensionX)){
+//            if (aiStep[0] >= 0 && aiStep[1] >= 0 && !isPointFull(point)){
+//                aiStepY = aiStep[0] -1;
+//                aiStepX = aiStep[1] -1;
+//                System.out.println("A");
+//            }else {
+//
+//            }
+//
+//        }else {
+//            System.out.println(gameUtility.allStepsInString + "allStepsInString");//*******************
+//            if (gameUtility.allStepsInString.size() < 1){
+//                //AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.exStepsInString, gameUtility.ooStepsInString);
+//                int[] i = centerOfTable();
+//                System.out.println(i[0] + " " + i[1] + " az 'üres' pont");
+//                aiStepY = i[0] -0;
+//                aiStepX = i[1] -0;
+//                System.out.println("B");
+//            } else { //////dummy steps
+//                Random random = new Random();
+//                aiStepY = random.nextInt(5) + 1;
+//                aiStepX = random.nextInt(5) + 1;
+//                System.out.println("C");
+//            }
+//        }
 
     }
 
