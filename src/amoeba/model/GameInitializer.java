@@ -16,7 +16,7 @@ public class GameInitializer {
     private boolean isGameEnded;
     private final int numberOfPlayers;
     private final int whoStarts;
-    private final AIPlayer AIPlayer;
+    private final BotPlayer BotPlayer;
 
     public GameInitializer(int yDim, int xDim, int numberOfPlayers, int whoStarts) {
         gameUtility = new GameUtility(yDim, xDim);
@@ -26,7 +26,7 @@ public class GameInitializer {
         this.xDim = xDim;
         this.numberOfPlayers = numberOfPlayers;
         this.whoStarts = whoStarts;
-        this.AIPlayer = new AIPlayer(gameUtility, whoStarts);
+        this.BotPlayer = new BotPlayer(gameUtility, whoStarts);
     }
 
     private void takePlayerStep(int XO) throws IOException {
@@ -60,17 +60,17 @@ public class GameInitializer {
         int x;
 
         if (gameUtility.allStepsInString.isEmpty()){
-            AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.exStepsInString, gameUtility.ooStepsInString);
+            BotPlayer.aiMainAlgorithm(whoStarts, gameUtility.exStepsInString, gameUtility.ooStepsInString);
         }
 
-        System.out.println(AIPlayer.aiStepY + " " + AIPlayer.aiStepX + " asdasdasd");
+        System.out.println(BotPlayer.aiStepY + " " + BotPlayer.aiStepX + " asdasdasd");
 
-        while (gameUtility.checkValidity((y = AIPlayer.aiStepY ), (x = AIPlayer.aiStepX ))) { // -1 -1
+        while (gameUtility.checkValidity((y = BotPlayer.aiStepY ), (x = BotPlayer.aiStepX ))) { // -1 -1
             ConsoleTexts.printWrongCoordinates();
-            AIPlayer.aiMainAlgorithm(whoStarts, gameUtility.ooStepsInString, gameUtility.exStepsInString);
+            BotPlayer.aiMainAlgorithm(whoStarts, gameUtility.ooStepsInString, gameUtility.exStepsInString);
         }
 
-        System.out.println(AIPlayer.aiStepY + " " + AIPlayer.aiStepX + " asdasdasdasd");
+        System.out.println(BotPlayer.aiStepY + " " + BotPlayer.aiStepX + " asdasdasdasd");
 
         if (XO == 1) {
             gameUtility.addExStep(y+1, x+1);////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

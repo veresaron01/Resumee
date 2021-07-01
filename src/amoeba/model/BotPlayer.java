@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AIPlayer {
+public class BotPlayer {
 
     private GameUtility gameUtility;
     private int whoStarts;
@@ -20,7 +20,7 @@ public class AIPlayer {
     public int aiStepX;
 
 
-    public AIPlayer(GameUtility gameUtility, int whoStarts) {
+    public BotPlayer(GameUtility gameUtility, int whoStarts) {
         this.gameUtility = gameUtility;
         this.whoStarts = whoStarts;
         gameUtility.getDiagonalMatches(3, allPartMatchesInTheDiagons3);
@@ -83,7 +83,7 @@ public class AIPlayer {
             }
         }
 
-
+//mahaut machine learning
 
         System.out.println(aiStepY + " " + aiStepX + " asdasd");
 
@@ -342,7 +342,7 @@ public class AIPlayer {
 
     public static void main(String[] args) {
         GameUtility gameUtility2 = new GameUtility(5,5);
-        AIPlayer ai = new AIPlayer(gameUtility2, 1);
+        BotPlayer ai = new BotPlayer(gameUtility2, 1);
 
 
 
