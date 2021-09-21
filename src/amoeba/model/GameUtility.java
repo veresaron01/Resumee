@@ -41,7 +41,7 @@ public class GameUtility {
             }
         }
     }
-//nem jo eppen
+//nem jo eppen // mégis jonak tunik
     public void getDiagonalMatches(int length, List<List<String>> diagonalPartMatches) { //TODO
 
         //atlosan lehetseges talalatok bal fentrol, jobb le.

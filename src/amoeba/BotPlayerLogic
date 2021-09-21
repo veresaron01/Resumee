@@ -36,6 +36,7 @@ oda kell tenni
     megnézni van-e szabad vége,
     megnézni melyik szabad vége segít engem, ha csak egy van akkor eggyel távolabbi is jó lehet ha segít engem
     oda kell tenni
+     ***
 
 8.
     megtalálni a 2 részes híjas ellenséges találatokat minden irányban
@@ -57,7 +58,9 @@ oda kell tenni
 
 10.
     megtalálni 1 hosszúságú ellenséges találatokat
-    mellé tenni*
+    mellé tenni
+    *
+    **
 
 11.
 a tábla közepéhez közel tenni(ha nem üres akkor *) (kezdő lépést randomizálni, a keret kivételével bárhova)
@@ -65,4 +68,6 @@ a tábla közepéhez közel tenni(ha nem üres akkor *) (kezdő lépést randomi
 
 
 
-*(mindig a saját pontjaim közelébe tegye ha ekvivalens választási lehetőség adódik)
+*(mindig a saját pontjaim közelébe tegye, ha ekvivalens választási lehetőség adódik)
+**(mindig a tábla közelébe tegye, ha ekvivalens választási lehetőség adódik)
+***(ha nem gyűlhet ki célszám akkor nem teszem oda)
